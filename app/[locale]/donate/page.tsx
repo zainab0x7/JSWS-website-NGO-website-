@@ -5,10 +5,12 @@ import { Button } from"@/components/ui/button";
 import { Card, CardContent } from"@/components/ui/card";
 import { HeartHandshake, ShieldCheck, TrendingUp, HandCoins } from"lucide-react";
 import { useState } from"react";
+import { useTranslations } from "next-intl";
 
 const donationAmounts = [1000, 5000, 10000, 20000];
 
 export default function DonatePage() {
+  const t = useTranslations("DonatePage");
  const [selectedAmount, setSelectedAmount] = useState<number>(5000);
  const [customAmount, setCustomAmount] = useState<string>("");
 
@@ -33,10 +35,10 @@ export default function DonatePage() {
  >
  <HeartHandshake className="w-16 h-16 text-[var(--color-primary)] mx-auto mb-6"/>
  <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight">
- Your Contribution Saves Lives
+ {t('hero_title')}
  </h1>
  <p className="text-xl text-gray-600">
- Every donation helps us provide essential healthcare services, medical camps, and preventive care to those who need it most.
+ {t('hero_desc')}
  </p>
  </motion.div>
  </div>
@@ -51,8 +53,8 @@ export default function DonatePage() {
  >
  <Card className="border-none shadow-2xl bg-white p-8 md:p-12 rounded-3xl">
  <div className="text-center mb-8">
- <h2 className="font-heading text-3xl font-bold text-[var(--color-black)] mb-2">Select Donation Amount</h2>
- <p className="text-gray-500">Your generosity powers our mission.</p>
+ <h2 className="font-heading text-3xl font-bold text-[var(--color-black)] mb-2">{t('select_title')}</h2>
+ <p className="text-gray-500">{t('select_desc')}</p>
  </div>
 
  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -87,7 +89,7 @@ export default function DonatePage() {
  setCustomAmount(e.target.value);
  setSelectedAmount(0);
  }}
- placeholder="Enter custom amount"
+ placeholder={t('custom_amount')}
  className="w-full pl-12 pr-4 py-4 rounded-2xl border-2 border-gray-200 bg-transparent text-lg focus:outline-none focus:border-[var(--color-primary)] transition-colors"
  />
  </div>
@@ -95,25 +97,25 @@ export default function DonatePage() {
 
  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
  <Button size="lg"className="h-14 rounded-2xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white text-lg w-full">
- Donate via Credit/Debit Card
+ {t('donate_card')}
  </Button>
  <Button size="lg"variant="outline"className="h-14 rounded-2xl border-gray-300 w-full text-lg">
- Bank Transfer Details
+ {t('bank_transfer')}
  </Button>
  </div>
 
  <div className="mt-8 pt-8 border-t border-gray-100 flex flex-wrap justify-center gap-8 text-center">
  <div className="flex flex-col items-center gap-2">
  <ShieldCheck className="w-8 h-8 text-green-500"/>
- <span className="text-sm font-medium text-gray-600">100% Secure</span>
+ <span className="text-sm font-medium text-gray-600">{t('secure')}</span>
  </div>
  <div className="flex flex-col items-center gap-2">
  <HandCoins className="w-8 h-8 text-[var(--color-primary)]"/>
- <span className="text-sm font-medium text-gray-600">Tax Deductible</span>
+ <span className="text-sm font-medium text-gray-600">{t('tax')}</span>
  </div>
  <div className="flex flex-col items-center gap-2">
  <TrendingUp className="w-8 h-8 text-blue-500"/>
- <span className="text-sm font-medium text-gray-600">Transparent Impact</span>
+ <span className="text-sm font-medium text-gray-600">{t('transparent')}</span>
  </div>
  </div>
  </Card>

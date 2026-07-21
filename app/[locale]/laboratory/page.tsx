@@ -19,7 +19,10 @@ const labTests = [
 "Infectious Disease Screening"
 ];
 
+import { useTranslations } from "next-intl";
+
 export default function LaboratoryPage() {
+  const t = useTranslations("LaboratoryPage");
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-white">
  {/* Hero Section */}
@@ -32,17 +35,17 @@ export default function LaboratoryPage() {
  className="w-full md:w-1/2 space-y-6"
  >
  <h1 className="font-heading text-5xl md:text-6xl font-bold text-[var(--color-black)] leading-tight">
- State-of-the-Art <span className="text-[var(--color-primary)]">Diagnostic Laboratory</span>
+ {t('hero_title_start')} <span className="text-[var(--color-primary)]">{t('hero_title_highlight')}</span>
  </h1>
  <p className="text-lg text-gray-600">
- Sultan Advanced Reference Center (SARC) provides accurate, reliable, and timely diagnostic services using the latest medical equipment and certified pathologists.
+ {t('hero_desc')}
  </p>
  <div className="flex flex-wrap gap-4 pt-4">
  <Button asChild size="lg"className="rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white">
- <Link href="#download-report">Download Report <Download className="ml-2 w-4 h-4"/></Link>
+ <Link href="#download-report">{t('download_report')} <Download className="ml-2 w-4 h-4"/></Link>
  </Button>
  <Button asChild size="lg"variant="outline"className="rounded-full border-gray-300">
- <Link href="#tests">View All Tests</Link>
+ <Link href="#tests">{t('view_tests')}</Link>
  </Button>
  </div>
  </motion.div>
@@ -68,23 +71,23 @@ export default function LaboratoryPage() {
  <div className="container mx-auto px-4 md:px-6">
  <div className="bg-red-50 rounded-3xl p-8 md:p-12 shadow-inner max-w-4xl mx-auto border border-red-100 text-center">
  <FileText className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6"/>
- <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">Online Report Download</h2>
+ <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">{t('report_title')}</h2>
  <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
- Access your medical reports securely from the comfort of your home. Enter your MR number and password provided on your receipt.
+ {t('report_desc')}
  </p>
  <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto">
  <input 
  type="text"
- placeholder="MR Number"
+ placeholder={t('mr_number')}
  className="px-4 py-3 rounded-full border border-gray-300 bg-white w-full focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
  />
  <input 
  type="password"
- placeholder="Password"
+ placeholder={t('password')}
  className="px-4 py-3 rounded-full border border-gray-300 bg-white w-full focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
  />
  <Button size="lg"className="rounded-full bg-white text-white">
- Access
+ {t('access')}
  </Button>
  </div>
  </div>
@@ -97,10 +100,10 @@ export default function LaboratoryPage() {
  <div className="text-center max-w-3xl mx-auto mb-16">
  <Beaker className="w-10 h-10 text-[var(--color-primary)] mx-auto mb-4"/>
  <h2 className="font-heading text-4xl font-bold text-[var(--color-black)] mb-6">
- Available Tests & Profiles
+ {t('tests_title')}
  </h2>
  <p className="text-gray-600">
- We offer a comprehensive menu of routine and specialized tests at highly subsidized rates.
+ {t('tests_desc')}
  </p>
  </div>
 
@@ -115,7 +118,7 @@ export default function LaboratoryPage() {
  className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4 hover:shadow-md transition-shadow"
  >
  <CheckCircle2 className="w-5 h-5 text-[var(--color-primary)] shrink-0"/>
- <span className="font-medium text-gray-800">{test}</span>
+ <span className="font-medium text-gray-800">{t(`tests.${index}`)}</span>
  </motion.div>
  ))}
  </div>

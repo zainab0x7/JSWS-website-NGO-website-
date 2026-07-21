@@ -5,7 +5,10 @@ import { Button } from"@/components/ui/button";
 import { Card, CardContent } from"@/components/ui/card";
 import { Users, Heart, GraduationCap, MapPin } from"lucide-react";
 
+import { useTranslations } from "next-intl";
+
 export default function VolunteerPage() {
+  const t = useTranslations("VolunteerPage");
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-[var(--color-gray-light)]">
  {/* Hero Section */}
@@ -26,10 +29,10 @@ export default function VolunteerPage() {
  >
  <Users className="w-16 h-16 text-[var(--color-primary)] mx-auto mb-6"/>
  <h1 className="font-heading text-5xl md:text-6xl font-bold leading-tight">
- Join Our Mission
+ {t('hero_title')}
  </h1>
  <p className="text-xl text-gray-600">
- Become a JSWS Volunteer and make a tangible difference in the lives of underserved communities.
+ {t('hero_desc')}
  </p>
  </motion.div>
  </div>
@@ -40,9 +43,9 @@ export default function VolunteerPage() {
  <div className="container mx-auto px-4 md:px-6">
  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
  {[
- { icon: Heart, title:"Make an Impact", desc:"Directly contribute to saving lives and improving health outcomes."},
- { icon: GraduationCap, title:"Learn & Grow", desc:"Gain valuable experience working alongside medical professionals."},
- { icon: MapPin, title:"Community Service", desc:"Serve the community by participating in local medical camps."}
+ { icon: Heart, title: t('impact_title'), desc: t('impact_desc') },
+ { icon: GraduationCap, title: t('learn_title'), desc: t('learn_desc') },
+ { icon: MapPin, title: t('service_title'), desc: t('service_desc') }
  ].map((benefit, index) => (
  <motion.div
  key={index}
@@ -70,34 +73,34 @@ export default function VolunteerPage() {
  >
  <Card className="border-none shadow-2xl bg-white p-8 md:p-12 rounded-3xl">
  <div className="text-center mb-8">
- <h2 className="font-heading text-3xl font-bold text-[var(--color-black)] mb-2">Volunteer Application</h2>
- <p className="text-gray-500">Fill out the form below and our team will get in touch with you.</p>
+ <h2 className="font-heading text-3xl font-bold text-[var(--color-black)] mb-2">{t('form_title')}</h2>
+ <p className="text-gray-500">{t('form_desc')}</p>
  </div>
 
  <form className="space-y-6">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
  <div className="space-y-2">
- <label className="text-sm font-medium text-gray-700">First Name</label>
- <input type="text"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder="John"/>
+ <label className="text-sm font-medium text-gray-700">{t('first_name')}</label>
+ <input type="text"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder={t('placeholders.first_name')}/>
  </div>
  <div className="space-y-2">
- <label className="text-sm font-medium text-gray-700">Last Name</label>
- <input type="text"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder="Doe"/>
+ <label className="text-sm font-medium text-gray-700">{t('last_name')}</label>
+ <input type="text"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder={t('placeholders.last_name')}/>
  </div>
  </div>
 
  <div className="space-y-2">
- <label className="text-sm font-medium text-gray-700">Email Address</label>
- <input type="email"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder="john@example.com"/>
+ <label className="text-sm font-medium text-gray-700">{t('email')}</label>
+ <input type="email"className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"placeholder={t('placeholders.email')}/>
  </div>
 
  <div className="space-y-2">
- <label className="text-sm font-medium text-gray-700">Why do you want to volunteer?</label>
- <textarea className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] h-32 resize-none"placeholder="Tell us about yourself..."></textarea>
+ <label className="text-sm font-medium text-gray-700">{t('why')}</label>
+ <textarea className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] h-32 resize-none"placeholder={t('placeholders.why')}></textarea>
  </div>
 
  <Button size="lg"className="w-full h-14 rounded-xl bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white text-lg">
- Submit Application
+ {t('submit')}
  </Button>
  </form>
  </Card>

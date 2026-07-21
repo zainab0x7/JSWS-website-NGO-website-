@@ -6,7 +6,10 @@ import { CheckCircle2, ArrowRight } from"lucide-react";
 import { Button } from"@/components/ui/button";
 import Link from"next/link";
 
+import { useTranslations } from "next-intl";
+
 export default function ServicesPage() {
+  const t = useTranslations("ServicesPage");
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-white">
  {/* Hero Section */}
@@ -25,9 +28,9 @@ export default function ServicesPage() {
  transition={{ duration: 0.8 }}
  className="max-w-3xl mx-auto space-y-6"
  >
- <h1 className="font-heading text-5xl md:text-6xl font-bold">Comprehensive Healthcare</h1>
+ <h1 className="font-heading text-5xl md:text-6xl font-bold">{t('hero_title')}</h1>
  <p className="text-xl text-gray-600">
- Delivering high-quality, specialized medical services with compassion and professional excellence.
+ {t('hero_desc')}
  </p>
  </motion.div>
  </div>
@@ -49,19 +52,13 @@ export default function ServicesPage() {
  transition={{ duration: 0.8 }}
  >
  <h2 className="font-heading text-4xl font-bold text-[var(--color-black)] mb-6">
- Specialized Care Programs
+ {t('special_title')}
  </h2>
  <p className="text-gray-600 mb-8 text-lg leading-relaxed">
- Our specialized programs are designed to address the specific health challenges of our community, offering targeted interventions and continuous support.
+ {t('special_desc')}
  </p>
  <ul className="space-y-4">
- {[
-"Maternal & Child Health Initiative",
-"Free Diabetes & Hypertension Clinics",
-"Hepatitis Screening & Vaccination Drive",
-"Nutritional Support for Undernourished Children",
-"Mobile Medical Camps for Remote Areas"
- ].map((item, index) => (
+ {[0, 1, 2, 3, 4].map((index) => (
  <motion.li 
  key={index}
  initial={{ opacity: 0, y: 10 }}
@@ -71,13 +68,13 @@ export default function ServicesPage() {
  className="flex items-start gap-3"
  >
  <CheckCircle2 className="w-6 h-6 text-[var(--color-primary)] shrink-0 mt-0.5"/>
- <span className="text-gray-800 font-medium text-lg">{item}</span>
+ <span className="text-gray-800 font-medium text-lg">{t(`programs.${index}`)}</span>
  </motion.li>
  ))}
  </ul>
  <div className="mt-10">
  <Button asChild size="lg"className="rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white">
- <Link href="/doctors">Consult a Specialist <ArrowRight className="ml-2 w-5 h-5"/></Link>
+ <Link href="/doctors">{t('consult')} <ArrowRight className="ml-2 w-5 h-5"/></Link>
  </Button>
  </div>
  </motion.div>

@@ -72,17 +72,20 @@ const doctors = [
  }
 ];
 
+import { useTranslations } from "next-intl";
+
 export default function DoctorsPage() {
+  const t = useTranslations("DoctorsPage");
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-[var(--color-gray-light)]">
  <div className="container mx-auto px-4 md:px-6 py-12">
  <div className="text-center max-w-3xl mx-auto mb-16">
  <Stethoscope className="w-12 h-12 text-[var(--color-primary)] mx-auto mb-6"/>
  <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-[var(--color-black)] mb-6">
- Our Specialists
+ {t('hero_title')}
  </h1>
  <p className="text-gray-600 text-lg">
- Meet our highly qualified and experienced medical professionals dedicated to providing the best healthcare services.
+ {t('hero_desc')}
  </p>
  </div>
 
@@ -103,20 +106,20 @@ export default function DoctorsPage() {
  <div className="flex items-center gap-3">
  <Award className="w-5 h-5 text-gray-600"/>
  <div>
- <p className="text-sm text-gray-500">Qualifications</p>
+ <p className="text-sm text-gray-500">{t('qualifications')}</p>
  <p className="font-medium text-[var(--color-black)]">{doctor.qualifications}</p>
  </div>
  </div>
  <div className="flex items-center gap-3">
  <CalendarClock className="w-5 h-5 text-gray-600"/>
  <div>
- <p className="text-sm text-gray-500">Availability</p>
+ <p className="text-sm text-gray-500">{t('availability')}</p>
  <p className="font-medium text-[var(--color-black)]">{doctor.availability}</p>
  </div>
  </div>
  <div className="pt-4 border-t border-gray-100">
  <Button className="w-full rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white">
- Book Appointment
+ {t('book')}
  </Button>
  </div>
  </CardContent>

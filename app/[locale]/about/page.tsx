@@ -2,8 +2,10 @@
 
 import { motion } from"framer-motion";
 import { Heart, Target, Lightbulb, Users, Clock, Trophy } from"lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function AboutPage() {
+  const t = useTranslations("AboutPage");
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-white">
  {/* Hero Section */}
@@ -22,9 +24,9 @@ export default function AboutPage() {
  transition={{ duration: 0.8 }}
  className="max-w-3xl mx-auto space-y-6"
  >
- <h1 className="font-heading text-5xl md:text-6xl font-bold">Our Story & Mission</h1>
+ <h1 className="font-heading text-5xl md:text-6xl font-bold">{t('hero_title')}</h1>
  <p className="text-xl text-red-100">
- Dedicated to serving humanity through accessible, high-quality healthcare and community welfare programs since our inception.
+ {t('hero_desc')}
  </p>
  </motion.div>
  </div>
@@ -42,9 +44,9 @@ export default function AboutPage() {
  className="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-[var(--color-primary)]"
  >
  <Target className="w-12 h-12 text-[var(--color-primary)] mb-6"/>
- <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">Our Mission</h2>
+ <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">{t('mission_title')}</h2>
  <p className="text-gray-600 text-lg leading-relaxed">
- To provide accessible, affordable, and compassionate healthcare services while promoting preventive healthcare, public awareness, education, and community welfare for underserved communities across the nation.
+ {t('mission_desc')}
  </p>
  </motion.div>
 
@@ -56,9 +58,9 @@ export default function AboutPage() {
  className="bg-white p-10 rounded-3xl shadow-lg border-t-4 border-[var(--color-black)]"
  >
  <Lightbulb className="w-12 h-12 text-[var(--color-black)] mb-6"/>
- <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">Our Vision</h2>
+ <h2 className="font-heading text-3xl font-bold mb-4 text-[var(--color-black)]">{t('vision_title')}</h2>
  <p className="text-gray-600 text-lg leading-relaxed">
- To build a healthy, educated, and empowered society where everyone has equal access to quality healthcare and welfare services, eliminating disparities in medical treatment.
+ {t('vision_desc')}
  </p>
  </motion.div>
  </div>
@@ -69,18 +71,18 @@ export default function AboutPage() {
  <section className="py-24 bg-white">
  <div className="container mx-auto px-4 md:px-6">
  <div className="text-center max-w-3xl mx-auto mb-16">
- <h2 className="font-heading text-4xl font-bold text-[var(--color-black)] mb-6">Our Core Values</h2>
+ <h2 className="font-heading text-4xl font-bold text-[var(--color-black)] mb-6">{t('values_title')}</h2>
  <p className="text-gray-600 text-lg">
- The principles that guide our everyday operations and interactions with patients and communities.
+ {t('values_desc')}
  </p>
  </div>
 
  <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
  {[
- { icon: Heart, title:"Compassion"},
- { icon: Users, title:"Humanity"},
- { icon: Trophy, title:"Excellence"},
- { icon: Clock, title:"Transparency"}
+ { icon: Heart, title: t('values.compassion')},
+ { icon: Users, title: t('values.humanity')},
+ { icon: Trophy, title: t('values.excellence')},
+ { icon: Clock, title: t('values.transparency')}
  ].map((value, index) => (
  <motion.div
  key={value.title}
