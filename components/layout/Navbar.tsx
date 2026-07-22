@@ -32,7 +32,15 @@ export function Navbar() {
     }, 150);
   };
 
-  const programsDropdown = [
+  interface NavDropdownItem {
+    href: string;
+    label: string;
+    icon: React.ElementType;
+    desc?: string;
+    disabled?: boolean;
+  }
+
+  const programsDropdown: NavDropdownItem[] = [
     { href: "/jsmdc", label: t('jsmdc_full'), icon: Stethoscope, desc: "Medical and Dental Services" },
     { href: "/sarc", label: t('sarc_full'), icon: Activity, desc: "Rehabilitation & Therapy" },
     { href: "/scholarships", label: t('sasp_full'), icon: GraduationCap, desc: "Educational Support" },
@@ -40,7 +48,7 @@ export function Navbar() {
     { href: "#", label: t('dialysis'), icon: ShieldPlus, desc: "Future Expansion Project", disabled: true },
   ];
 
-  const donateDropdown = [
+  const donateDropdown: NavDropdownItem[] = [
     { href: "/donate?cause=zakat", label: t('zakat'), icon: HandCoins },
     { href: "/donate?cause=sadqah", label: t('sadqah'), icon: Heart },
     { href: "/donate?cause=general", label: t('general_donation'), icon: Heart },
