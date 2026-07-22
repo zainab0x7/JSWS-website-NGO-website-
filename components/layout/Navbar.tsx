@@ -80,16 +80,14 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out border-b border-transparent",
-        isScrolled
-          ? "bg-white/90 backdrop-blur-md shadow-sm border-gray-200 py-2"
-          : "bg-transparent py-4"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out border-b border-gray-200 bg-white",
+        isScrolled ? "shadow-sm py-2" : "py-4"
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <img src="/jsws-logo.png" alt="JSWS Logo" className="h-8 sm:h-10 md:h-12 w-auto object-contain transition-transform group-hover:scale-105 bg-white p-1 rounded" />
+          <img src="/jsws-logo.png" alt="JSWS Logo" className="h-10 sm:h-12 md:h-14 w-auto object-contain transition-transform group-hover:scale-105" />
         </Link>
 
         {/* Desktop Navigation */}
@@ -112,7 +110,7 @@ export function Navbar() {
                       "flex items-center gap-1 text-sm font-medium transition-colors py-2 whitespace-nowrap",
                       isActiveDropdown || isChildActive
                         ? "text-[var(--color-primary)]"
-                        : "text-gray-600 hover:text-[var(--color-primary)]"
+                        : "text-black hover:text-gray-500"
                     )}
                     aria-expanded={isActiveDropdown}
                   >
@@ -188,10 +186,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href as any}
                 className={cn(
-                  "text-sm font-medium transition-colors hover:text-[var(--color-primary)] whitespace-nowrap",
+                  "text-sm font-medium transition-colors hover:text-gray-500 whitespace-nowrap",
                   pathname === link.href
                     ? "text-[var(--color-primary)]"
-                    : "text-gray-600"
+                    : "text-black"
                 )}
               >
                 {link.label}
@@ -266,7 +264,7 @@ export function Navbar() {
                                       "block px-4 py-2.5 rounded-lg text-sm font-medium transition-colors",
                                       pathname === item.href
                                         ? "text-[var(--color-primary)] bg-red-50"
-                                        : "text-gray-600 hover:text-[var(--color-primary)] hover:bg-red-50/50"
+                                        : "text-black hover:text-gray-500 hover:bg-gray-50"
                                     )}
                                   >
                                     {item.label}
@@ -290,7 +288,7 @@ export function Navbar() {
                       "block px-4 py-3 rounded-xl text-base font-medium transition-colors",
                       pathname === link.href
                         ? "text-[var(--color-primary)] bg-red-50"
-                        : "text-gray-700 hover:bg-gray-50"
+                        : "text-black hover:text-gray-500 hover:bg-gray-50"
                     )}
                   >
                     {link.label}

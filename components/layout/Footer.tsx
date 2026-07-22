@@ -22,22 +22,26 @@ export function Footer() {
  const t = useTranslations('Footer');
 
  return (
- <footer className="bg-white text-[var(--color-black)] pt-20 pb-10 border-t border-gray-200">
+ <footer className="bg-gray-50 text-[var(--color-black)] pt-20 pb-10 border-t border-gray-200">
  <div className="container mx-auto px-4 md:px-6">
  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
  {/* Brand & Child Orgs */}
  <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
  <Link href="/"className="inline-block group">
- <img src="/jsws-logo.png"alt="JSWS Logo"className="h-12 sm:h-14 md:h-16 w-auto object-contain transition-transform group-hover:scale-105"/>
+ <img src="/jsws-logo.png"alt="JSWS Logo"className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-105"/>
  </Link>
  <p className="text-gray-600 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
  {t('description')}
  </p>
  
  {/* Child Organizations */}
- <div className="pt-2 pb-4 flex flex-row flex-wrap justify-center md:justify-start gap-4 items-center">
- <img src="/sarc-logo.png"alt="SARC Logo"className="h-10 sm:h-12 md:h-14 w-auto object-contain"/>
- <img src="/jsmdc-logo.png"alt="JSMDC Logo"className="h-10 sm:h-12 md:h-14 w-auto object-contain"/>
+ <div className="pt-2 pb-4 flex flex-col items-center md:items-start gap-4 w-full">
+   <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">Our Initiatives</p>
+   <div className="flex flex-row flex-nowrap justify-center md:justify-start gap-4 sm:gap-8 items-center bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm border border-gray-100/80 hover:shadow-md transition-shadow overflow-hidden w-fit">
+     <img src="/sarc-logo.png" alt="SARC Logo" className="h-12 sm:h-16 md:h-20 max-w-[100px] sm:max-w-[140px] w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 shrink-0" />
+     <div className="w-px h-10 bg-gray-200 shrink-0"></div>
+     <img src="/jsmdc-logo.png" alt="JSMDC Logo" className="h-12 sm:h-16 md:h-20 max-w-[100px] sm:max-w-[140px] w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 shrink-0" />
+   </div>
  </div>
 
  <div className="flex items-center justify-center md:justify-start gap-4">
