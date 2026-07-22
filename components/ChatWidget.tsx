@@ -4,11 +4,13 @@ import { useState } from 'react';
 import { useChat } from '@ai-sdk/react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import { Button } from './ui/button';
+import { useTranslations } from 'next-intl';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState('');
   const { messages, sendMessage, status } = useChat();
+  const t = useTranslations('ChatWidget');
 
   const isLoading = status === 'submitted' || status === 'streaming';
 
@@ -28,7 +30,7 @@ export default function ChatWidget() {
       {isOpen ? (
         <div className="bg-white border rounded-lg shadow-xl w-80 sm:w-96 h-[500px] flex flex-col">
           <div className="flex justify-between items-center p-4 border-b bg-primary text-primary-foreground rounded-t-lg">
-            <h3 className="font-semibold text-white">JSWS Assistant</h3>
+            <h3 className="font-semibold text-white">{t('title')}</h3>
             <button onClick={() => setIsOpen(false)} className="text-white hover:text-gray-200">
               <X size={20} />
             </button>
@@ -37,20 +39,20 @@ export default function ChatWidget() {
           <div className="flex-1 overflow-y-auto p-4 space-y-4">
             {messages.length === 0 && (
               <p className="text-gray-500 text-sm text-center mt-4">
-                Hi! Ask me anything about JSWS services.
+                {t('welcome_message')}
               </p>
             )}
             {messages.map((m) => (
               <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[80%] rounded-lg p-3 text-sm ${m.role === 'user' ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-800'}`}>
-                  {m.text || m.parts?.find(p => p.type === 'text')?.text}
+                  {('content' in m ? (m as any).content : '') || (m.parts && m.parts.length > 0 ? (m.parts.find((p: any) => p.type === 'text') as any)?.text : '')}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-gray-100 text-gray-800 rounded-lg p-3 text-sm animate-pulse">
-                  Thinking...
+                  {t('thinking')}
                 </div>
               </div>
             )}
@@ -61,7 +63,7 @@ export default function ChatWidget() {
               <input
                 className="flex-1 border rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 value={input}
-                placeholder="Type your message..."
+                placeholder={t('input_placeholder')}
                 onChange={handleInputChange}
               />
               <Button type="submit" size="icon" disabled={isLoading || !input.trim()}>

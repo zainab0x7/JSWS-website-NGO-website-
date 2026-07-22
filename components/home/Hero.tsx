@@ -50,14 +50,14 @@ export function Hero() {
         >
           <Button asChild size="lg" className="w-full sm:w-auto rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white px-6 sm:px-8 h-12 sm:h-14 text-sm sm:text-base">
             <Link href="/doctors">
-              {t('appointment_button')} <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
+              {t('book_appointment')} <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
             </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-gray-300 text-gray-800 hover:bg-gray-100 :bg-white/10 px-6 sm:px-8 h-12 sm:h-14 text-sm sm:text-base">
-            <Link href="/donate">{t('donate_button')}</Link>
+            <Link href="/donate">{t('donate_now')}</Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="w-full sm:w-auto rounded-full text-gray-700 hover:bg-gray-100 :bg-white/10 px-6 sm:px-8 h-12 sm:h-14 text-sm sm:text-base">
-            <Link href="/volunteer">{t('volunteer_button')}</Link>
+            <Link href="/volunteer">{t('become_volunteer')}</Link>
           </Button>
         </motion.div>
       </div>

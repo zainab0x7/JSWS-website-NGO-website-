@@ -240,5 +240,11 @@
       "3": "Nutritional Support for Undernourished Children",
       "4": "Mobile Medical Camps for Remote Areas"
     }
+  },
+  "ChatWidget": {
+    "title": "JSWS Assistant",
+    "welcome_message": "Hi! Ask me anything about JSWS services.",
+    "thinking": "Thinking...",
+    "input_placeholder": "Type your message..."
   }
 }
