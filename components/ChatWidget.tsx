@@ -6,6 +6,7 @@ import { Button } from './ui/button';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useChat } from '@ai-sdk/react';
+import { DefaultChatTransport } from 'ai';
 import { cn } from '@/lib/utils';
 
 export default function ChatWidget() {
@@ -13,9 +14,19 @@ export default function ChatWidget() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('ChatWidget');
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput, append } = useChat({
-    api: '/api/chat',
+  const [input, setInput] = useState('');
+  const { messages, status, sendMessage } = useChat({
+    transport: new DefaultChatTransport({ api: '/api/chat' }),
   });
+  const isLoading = status === 'submitted' || status === 'streaming';
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value);
+  const handleSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!input.trim()) return;
+    sendMessage({ text: input });
+    setInput('');
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -31,18 +42,7 @@ export default function ChatWidget() {
   ];
 
   const handleQuickReply = (text: string) => {
-    if (typeof append === 'function') {
-      append({
-        role: 'user',
-        content: text,
-      });
-    } else if (typeof setInput === 'function') {
-      setInput(text);
-    } else {
-      handleInputChange({
-        target: { value: text }
-      } as any);
-    }
+    sendMessage({ text });
   };
 
   return (
@@ -129,7 +129,11 @@ export default function ChatWidget() {
                       : 'bg-white border border-gray-100 text-gray-800 rounded-tl-sm'
                   )}>
                     <div className="whitespace-pre-wrap leading-relaxed">
-                      {m.content}
+                      {m.parts?.map((part, i) => (
+                        <span key={i}>
+                          {part.type === 'text' ? part.text : null}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </motion.div>
