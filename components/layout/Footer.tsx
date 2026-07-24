@@ -1,6 +1,7 @@
-import Link from"next/link";
-import { HeartPulse, Mail, Phone, MapPin } from"lucide-react";
+import { Link } from "@/i18n/routing";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { BidiLTR } from "@/components/ui/BidiLTR";
 
 const Facebook = (props: React.SVGProps<SVGSVGElement>) => (
  <svg xmlns="http://www.w3.org/2000/svg"width="24"height="24"viewBox="0 0 24 24"fill="none"stroke="currentColor"strokeWidth="2"strokeLinecap="round"strokeLinejoin="round"{...props}><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -19,104 +20,104 @@ const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
 );
 
 export function Footer() {
- const t = useTranslations('Footer');
+  const t = useTranslations('Footer');
 
- return (
- <footer className="bg-gray-50 text-[var(--color-black)] pt-20 pb-10 border-t border-gray-200">
- <div className="container mx-auto px-4 md:px-6">
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
- {/* Brand & Child Orgs */}
- <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
- <Link href="/"className="inline-block group">
- <img src="/jsws-logo.png"alt="JSWS Logo"className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-105"/>
- </Link>
- <p className="text-gray-600 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
- {t('description')}
- </p>
- 
- {/* Child Organizations */}
- <div className="pt-2 pb-4 flex flex-col items-center md:items-start gap-4 w-full">
-   <p className="text-sm font-semibold uppercase tracking-wider text-gray-500">Our Initiatives</p>
-   <div className="flex flex-row flex-nowrap justify-center md:justify-start gap-4 sm:gap-8 items-center bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm border border-gray-100/80 hover:shadow-md transition-shadow overflow-hidden w-fit">
-     <img src="/sarc-logo.png" alt="SARC Logo" className="h-12 sm:h-16 md:h-20 max-w-[100px] sm:max-w-[140px] w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 shrink-0" />
-     <div className="w-px h-10 bg-gray-200 shrink-0"></div>
-     <img src="/jsmdc-logo.png" alt="JSMDC Logo" className="h-12 sm:h-16 md:h-20 max-w-[100px] sm:max-w-[140px] w-auto object-contain opacity-85 hover:opacity-100 transition-all duration-300 grayscale hover:grayscale-0 shrink-0" />
-   </div>
- </div>
+  return (
+    <footer className="bg-gray-50 text-gray-900 pt-16 pb-10 border-t border-gray-200">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12">
+          {/* Brand & Child Orgs */}
+          <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
+            <Link href="/" className="inline-block group">
+              <img src="/jsws-logo.png" alt="JSWS Logo" className="h-16 sm:h-20 w-auto object-contain transition-transform group-hover:scale-105" />
+            </Link>
+            <p className="text-gray-600 text-sm leading-relaxed max-w-sm mx-auto md:mx-0">
+              {t('description')}
+            </p>
+            
+            {/* Child Organizations */}
+            <div className="pt-2 pb-4 flex flex-col items-center md:items-start gap-3 w-full">
+              <p className="text-xs font-bold uppercase tracking-wider text-gray-500">Our Initiatives</p>
+              <div className="flex flex-row flex-nowrap justify-center md:justify-start gap-4 sm:gap-6 items-center bg-white px-4 sm:px-6 py-3 rounded-2xl shadow-sm border border-gray-200/80 hover:shadow-md transition-shadow overflow-hidden max-w-full">
+                <img src="/sarc-logo.png" alt="SARC Logo" className="h-10 sm:h-14 max-w-[100px] sm:max-w-[130px] w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300 shrink-0" />
+                <div className="w-px h-8 bg-gray-200 shrink-0"></div>
+                <img src="/jsmdc-logo.png" alt="JSMDC Logo" className="h-10 sm:h-14 max-w-[100px] sm:max-w-[130px] w-auto object-contain opacity-90 hover:opacity-100 transition-all duration-300 shrink-0" />
+              </div>
+            </div>
 
- <div className="flex items-center justify-center md:justify-start gap-4">
- <a href="#"className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
- <Facebook className="h-5 w-5"/>
- </a>
- <a href="#"className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
- <Twitter className="h-5 w-5"/>
- </a>
- <a href="#"className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
- <Instagram className="h-5 w-5"/>
- </a>
- <a href="#"className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white transition-colors">
- <Linkedin className="h-5 w-5"/>
- </a>
- </div>
- </div>
+            <div className="flex items-center justify-center md:justify-start gap-3">
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white hover:border-[var(--color-primary)] transition-all shadow-sm">
+                <Facebook className="h-5 w-5"/>
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white hover:border-[var(--color-primary)] transition-all shadow-sm">
+                <Twitter className="h-5 w-5"/>
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white hover:border-[var(--color-primary)] transition-all shadow-sm">
+                <Instagram className="h-5 w-5"/>
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-[var(--color-primary)] hover:text-white hover:border-[var(--color-primary)] transition-all shadow-sm">
+                <Linkedin className="h-5 w-5"/>
+              </a>
+            </div>
+          </div>
 
- {/* Quick Links */}
- <div>
- <h4 className="font-heading text-lg font-semibold mb-6 text-gray-900">{t('quick_links')}</h4>
- <ul className="space-y-3">
- <li><Link href="/about"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.about')}</Link></li>
- <li><Link href="/services"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.services')}</Link></li>
- <li><Link href="/laboratory"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.laboratory')}</Link></li>
- <li><Link href="/doctors"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.doctors')}</Link></li>
- <li><Link href="/volunteer"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.volunteer')}</Link></li>
- </ul>
- </div>
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-heading text-base font-bold mb-5 text-gray-900 tracking-tight">{t('quick_links')}</h4>
+            <ul className="space-y-2.5">
+              <li><Link href="/about" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.about')}</Link></li>
+              <li><Link href="/services" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.services')}</Link></li>
+              <li><Link href="/laboratory" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.laboratory')}</Link></li>
+              <li><Link href="/doctors" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.doctors')}</Link></li>
+              <li><Link href="/volunteer" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.volunteer')}</Link></li>
+            </ul>
+          </div>
 
- {/* Departments */}
- <div>
- <h4 className="font-heading text-lg font-semibold mb-6 text-gray-900">{t('departments')}</h4>
- <ul className="space-y-3">
- <li><Link href="/services#general"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.general')}</Link></li>
- <li><Link href="/services#womens-health"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.womens_health')}</Link></li>
- <li><Link href="/services#childrens-health"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.childrens_health')}</Link></li>
- <li><Link href="/services#radiology"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.radiology')}</Link></li>
- <li><Link href="/services#vaccination"className="text-gray-600 hover:text-[var(--color-primary)] dark:text-white transition-colors text-sm">{t('links.vaccination')}</Link></li>
- </ul>
- </div>
+          {/* Departments */}
+          <div>
+            <h4 className="font-heading text-base font-bold mb-5 text-gray-900 tracking-tight">{t('departments')}</h4>
+            <ul className="space-y-2.5">
+              <li><Link href="/services#general" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.general')}</Link></li>
+              <li><Link href="/services#womens-health" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.womens_health')}</Link></li>
+              <li><Link href="/services#childrens-health" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.childrens_health')}</Link></li>
+              <li><Link href="/services#radiology" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.radiology')}</Link></li>
+              <li><Link href="/services#vaccination" className="text-gray-700 hover:text-[var(--color-primary)] font-medium transition-colors text-sm inline-block py-1">{t('links.vaccination')}</Link></li>
+            </ul>
+          </div>
 
- {/* Contact Info */}
- <div>
- <h4 className="font-heading text-lg font-semibold mb-6 text-gray-900">{t('contact_us')}</h4>
- <ul className="space-y-6">
- <li className="flex items-start gap-3">
- <MapPin className="h-6 w-6 text-[var(--color-primary)] shrink-0 mt-0.5"/>
- <span className="text-gray-600 text-sm leading-relaxed whitespace-pre-line">{t('address')}</span>
- </li>
- <li className="flex items-center gap-3">
- <Phone className="h-5 w-5 text-[var(--color-primary)] shrink-0"/>
- <div className="flex flex-col gap-1">
- <span className="text-gray-600 text-sm">+92 307 2021882</span>
- <span className="text-gray-600 text-sm">+92 336 3398787</span>
- </div>
- </li>
- <li className="flex items-center gap-3">
- <Mail className="h-5 w-5 text-[var(--color-primary)] shrink-0"/>
- <span className="text-gray-600 text-sm">jswswelfare@gmail.com</span>
- </li>
- </ul>
- </div>
- </div>
+          {/* Contact Info */}
+          <div>
+            <h4 className="font-heading text-base font-bold mb-5 text-gray-900 tracking-tight">{t('contact_us')}</h4>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="h-5 w-5 text-[var(--color-primary)] shrink-0 mt-0.5"/>
+                <span className="text-gray-700 text-sm leading-relaxed whitespace-pre-line">{t('address')}</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="h-5 w-5 text-[var(--color-primary)] shrink-0"/>
+                <div className="flex flex-col gap-0.5">
+                  <BidiLTR className="text-gray-700 font-medium text-sm">+92 307 2021882</BidiLTR>
+                  <BidiLTR className="text-gray-700 font-medium text-sm">+92 336 3398787</BidiLTR>
+                </div>
+              </li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-5 w-5 text-[var(--color-primary)] shrink-0"/>
+                <BidiLTR className="text-gray-700 font-medium text-sm">jswswelfare@gmail.com</BidiLTR>
+              </li>
+            </ul>
+          </div>
+        </div>
 
- <div className="border-t border-gray-200 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between gap-4">
- <p className="text-gray-500 text-sm text-center md:text-left">
- &copy; {new Date().getFullYear()} {t('rights')}
- </p>
- <div className="flex items-center gap-6 text-sm text-gray-500">
- <Link href="/privacy"className="hover:text-[var(--color-primary)] dark:text-white transition-colors">{t('privacy')}</Link>
- <Link href="/terms"className="hover:text-[var(--color-primary)] dark:text-white transition-colors">{t('terms')}</Link>
- </div>
- </div>
- </div>
- </footer>
- );
+        <div className="border-t border-gray-200 pt-8 mt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
+            &copy; <BidiLTR>{new Date().getFullYear()}</BidiLTR> Jamila Sultan Welfare Society. {t('rights')}
+          </p>
+          <div className="flex items-center gap-6 text-xs sm:text-sm text-gray-600">
+            <Link href="/privacy" className="hover:text-[var(--color-primary)] font-medium transition-colors">{t('privacy')}</Link>
+            <Link href="/terms" className="hover:text-[var(--color-primary)] font-medium transition-colors">{t('terms')}</Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

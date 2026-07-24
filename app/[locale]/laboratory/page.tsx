@@ -2,8 +2,7 @@
 
 import { motion } from"framer-motion";
 import { Button } from"@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from"@/components/ui/card";
-import { ArrowRight, Download, Beaker, FileText, CheckCircle2 } from"lucide-react";
+import { Download, Beaker, FileText, CheckCircle2 } from"lucide-react";
 import Link from"next/link";
 
 const labTests = [
@@ -86,7 +85,7 @@ export default function LaboratoryPage() {
  placeholder={t('password')}
  className="px-4 py-3 rounded-full border border-gray-300 bg-white w-full focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
  />
- <Button size="lg"className="rounded-full bg-white text-white">
+ <Button size="lg" className="rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold px-8 shadow-md transition-all">
  {t('access')}
  </Button>
  </div>

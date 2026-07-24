@@ -2,7 +2,7 @@
 
 import { motion } from"framer-motion";
 import { Button } from"@/components/ui/button";
-import { Card, CardContent } from"@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Users, Heart, GraduationCap, MapPin } from"lucide-react";
 
 import { useTranslations } from "next-intl";
@@ -12,7 +12,7 @@ export default function VolunteerPage() {
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-[var(--color-gray-light)]">
  {/* Hero Section */}
- <section className="relative py-24 bg-white text-white overflow-hidden">
+ <section className="relative py-24 bg-gray-900 text-white overflow-hidden">
  <div className="absolute inset-0 z-0">
  <img
  src="https://images.unsplash.com/photo-1593113563332-e1478161f307?q=80&w=2669&auto=format&fit=crop"

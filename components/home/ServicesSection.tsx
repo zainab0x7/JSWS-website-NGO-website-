@@ -99,7 +99,7 @@ export function ServicesSection() {
         </div>
 
         <div className="mt-16 text-center">
-          <Button asChild size="lg" className="rounded-full bg-white text-white hover:bg-gray-800 dark:bg-gray-200">
+          <Button asChild size="lg" className="rounded-full bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white font-bold px-8 shadow-lg shadow-red-500/20 transition-all hover:scale-105">
             <Link href="/services">{t('view_all')}</Link>
           </Button>
         </div>

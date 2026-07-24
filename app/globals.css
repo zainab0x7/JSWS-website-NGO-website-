@@ -27,3 +27,21 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* Bidirectional (BiDi) LTR helper styles */
+.bidi-ltr,
+.force-ltr,
+[dir="ltr"] {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+}
+
+[dir="rtl"] .bidi-number,
+[dir="rtl"] .bidi-phone,
+[dir="rtl"] .bidi-iban,
+[dir="rtl"] .bidi-email,
+[dir="rtl"] .bidi-url {
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block;
+}

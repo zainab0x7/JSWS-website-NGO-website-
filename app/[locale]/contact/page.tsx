@@ -5,6 +5,7 @@ import { Button } from"@/components/ui/button";
 import { Card } from"@/components/ui/card";
 import { MapPin, Phone, Mail, Clock } from"lucide-react";
 import { useTranslations } from "next-intl";
+import { BidiLTR } from "@/components/ui/BidiLTR";
 
 export default function ContactPage() {
   const t = useTranslations("ContactPage");
@@ -58,8 +59,8 @@ export default function ContactPage() {
  </div>
  <div>
  <h4 className="font-bold text-[var(--color-black)]">{t('phones')}</h4>
- <p className="text-gray-600">+92 307 2021882</p>
- <p className="text-gray-600">+92 336 3398787</p>
+ <p className="text-gray-600"><BidiLTR>+92 307 2021882</BidiLTR></p>
+ <p className="text-gray-600"><BidiLTR>+92 336 3398787</BidiLTR></p>
  </div>
  </div>
 
@@ -69,7 +70,7 @@ export default function ContactPage() {
  </div>
  <div>
  <h4 className="font-bold text-[var(--color-black)]">{t('email')}</h4>
- <p className="text-gray-600">jswswelfare@gmail.com</p>
+ <p className="text-gray-600"><BidiLTR>jswswelfare@gmail.com</BidiLTR></p>
  </div>
  </div>
 

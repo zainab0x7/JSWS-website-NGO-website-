@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/Hero";
 import { ProjectsSection } from "@/components/home/ProjectsSection";
+import { ServicesSection } from "@/components/home/ServicesSection";
 import { FutureProject } from "@/components/home/FutureProject";
 import { AboutSection } from "@/components/home/AboutSection";
 import { StatsSection } from "@/components/home/StatsSection";
@@ -11,6 +12,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <Hero />
       <ProjectsSection />
+      <ServicesSection />
       <FutureProject />
       <AboutSection />
       <StatsSection />

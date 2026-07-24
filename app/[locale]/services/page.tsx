@@ -13,8 +13,8 @@ export default function ServicesPage() {
  return (
  <div className="flex flex-col min-h-screen pt-24 bg-white">
  {/* Hero Section */}
- <section className="relative py-20 bg-white text-white overflow-hidden">
- <div className="absolute inset-0 opacity-20 mix-blend-overlay">
+ <section className="relative py-20 bg-gray-900 text-white overflow-hidden">
+ <div className="absolute inset-0 opacity-30 mix-blend-overlay">
  <img
  src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=2670&auto=format&fit=crop"
  alt="Medical team"
@@ -29,7 +29,7 @@ export default function ServicesPage() {
  className="max-w-3xl mx-auto space-y-6"
  >
  <h1 className="font-heading text-5xl md:text-6xl font-bold">{t('hero_title')}</h1>
- <p className="text-xl text-gray-600">
+ <p className="text-xl text-gray-200">
  {t('hero_desc')}
  </p>
  </motion.div>
