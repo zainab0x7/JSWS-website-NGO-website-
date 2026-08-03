@@ -1,0 +1,379 @@
+{
+  "Index": {
+    "title": "Jamiyah Sayyidat-un-Nisa",
+    "description": "Empowering society through education, health, and welfare."
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "doctors": "Doctors",
+    "laboratory": "Laboratory",
+    "contact": "Contact",
+    "volunteer": "Volunteer",
+    "donate": "Donate",
+    "board_of_trustees": "Board of Trustees",
+    "registration": "Registration",
+    "gallery": "Gallery",
+    "jsmdc": "JSMDC",
+    "sarc": "SARC",
+    "scholarships": "Scholarships",
+    "awareness": "Awareness Programs",
+    "programs": "Programs",
+    "jsmdc_full": "Jamila Sultan Medical & Dental Centre (JSMDC)",
+    "sarc_full": "Sultan Ahmed Rehabilitation Centre (SARC)",
+    "sasp_full": "Sultan Ahmed Scholarship Program (SASP)",
+    "dialysis": "Dialysis Centre (Coming Soon)",
+    "donate_dropdown": "Donate",
+    "zakat": "Zakat",
+    "sadqah": "Sadqah",
+    "general_donation": "General Donation",
+    "sponsor_patient": "Sponsor a Patient",
+    "sponsor_clinic": "Sponsor a Clinic",
+    "sponsor_medicines": "Sponsor Medicines",
+    "sponsor_equipment": "Sponsor Equipment"
+  },
+  "LanguageSwitcher": {
+    "en": "English",
+    "ur": "اردو"
+  },
+  "Hero": {
+    "badge": "Jamila Sultan Welfare Society",
+    "title_start": "Free & Subsidized ",
+    "title_highlight": "Healthcare\n",
+    "title_end": "for Deserving Patients",
+    "description": "Providing quality healthcare services with dignity, compassion, and hope.",
+    "book_appointment": "Book Appointment",
+    "donate_now": "Donate Now",
+    "become_volunteer": "Become Volunteer",
+    "cards": {
+      "medicines": "Free Medicines Distribution",
+      "healthcare": "Subsidized Healthcare",
+      "eye": "Eye Treatment",
+      "dental": "Medical & Dental Care"
+    }
+  },
+  "AboutSection": {
+    "badge": "About JSWS",
+    "title": "Our Best Way Everyday",
+    "description": "To build a healthy, educated, and empowered society where everyone has equal access to quality healthcare and welfare services. We are driven by compassion and the belief that healthcare is a fundamental human right.",
+    "features": {
+      "professional_care": "Professional Care",
+      "professional_care_desc": "Our team consists of qualified and experienced healthcare professionals dedicated to excellence.",
+      "compassionate_approach": "Compassionate Approach",
+      "compassionate_approach_desc": "We treat every patient with empathy, respect, and dignity, ensuring they feel supported.",
+      "transparency_trust": "Transparency & Trust",
+      "transparency_trust_desc": "We maintain the highest standards of integrity and transparency in all our welfare activities."
+    }
+  },
+  "ServicesSection": {
+    "badge": "Our Expertise",
+    "title": "Healthcare Services",
+    "description": "We offer a wide range of medical services designed to meet the healthcare needs of our community, delivered with professionalism and care.",
+    "view_all": "View All Services",
+    "learn_more": "Learn more",
+    "services": {
+      "general": {
+        "title": "General Consultation",
+        "description": "Expert medical advice and treatment from our qualified general physicians."
+      },
+      "camps": {
+        "title": "Medical Camps",
+        "description": "Free medical camps in underserved communities providing essential healthcare."
+      },
+      "laboratory": {
+        "title": "Laboratory (SARC)",
+        "description": "State-of-the-art diagnostic services ensuring accurate and timely test results."
+      },
+      "womens_health": {
+        "title": "Women's Health",
+        "description": "Specialized care focusing on maternal health, gynecology, and well-being."
+      },
+      "childrens_health": {
+        "title": "Children's Health",
+        "description": "Comprehensive pediatric care from vaccinations to general treatments."
+      },
+      "vaccination": {
+        "title": "Vaccination Center",
+        "description": "Immunization programs to protect against preventable diseases."
+      }
+    }
+  },
+  "StatsSection": {
+    "patients": "Patients Served",
+    "camps": "Medical Camps",
+    "tests": "Diagnostic Tests",
+    "volunteers": "Active Volunteers"
+  },
+  "WhyChooseUs": {
+    "badge": "Why Choose Us",
+    "title": "Excellence in Healthcare & Welfare",
+    "description": "We stand apart through our unwavering commitment to providing high-quality, compassionate healthcare to those who need it most, without compromising on professional standards.",
+    "reasons": {
+      "1": "Professional & Qualified Doctors",
+      "2": "Affordable & Accessible Care",
+      "3": "Patient-Centered Approach",
+      "4": "State-of-the-art Laboratory",
+      "5": "Comprehensive Community Programs",
+      "6": "Transparent & Trustworthy"
+    }
+  },
+  "HealthAwareness": {
+    "badge": "Health Education",
+    "title": "Health Awareness & Tips",
+    "view_all": "View All Articles"
+  },
+  "Footer": {
+    "description": "Jamila Sultan Welfare Society is committed to providing accessible healthcare, preventive medicine, and community welfare for underserved families across Pakistan.",
+    "quick_links": "Quick Links",
+    "departments": "Departments",
+    "contact_us": "Contact Us",
+    "address": "P-66 - 15 A, Sector 31A\nAllah Wala Town, Korangi\nKarachi, 74900, Pakistan",
+    "rights": "Jamila Sultan Welfare Society. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "links": {
+      "about": "About Us",
+      "services": "Healthcare Services",
+      "laboratory": "Medical Laboratory",
+      "doctors": "Our Doctors",
+      "volunteer": "Volunteer Program",
+      "general": "General Consultation",
+      "womens_health": "Women's Health",
+      "childrens_health": "Children's Health",
+      "radiology": "Radiology",
+      "vaccination": "Vaccination Center"
+    }
+  },
+  "AboutPage": {
+    "hero_title": "Our Story & Mission",
+    "hero_desc": "Dedicated to serving humanity through accessible, high-quality healthcare and community welfare programs since our inception.",
+    "mission_title": "Our Mission",
+    "mission_desc": "To provide accessible, affordable, and compassionate healthcare services while promoting preventive healthcare, public awareness, education, and community welfare for underserved communities across the nation.",
+    "vision_title": "Our Vision",
+    "vision_desc": "To build a healthy, educated, and empowered society where everyone has equal access to quality healthcare and welfare services, eliminating disparities in medical treatment.",
+    "values_title": "Our Core Values",
+    "values_desc": "The principles that guide our everyday operations and interactions with patients and communities.",
+    "values": {
+      "compassion": "Compassion",
+      "humanity": "Humanity",
+      "excellence": "Excellence",
+      "transparency": "Transparency"
+    }
+  },
+  "ContactPage": {
+    "hero_title": "Get in Touch",
+    "hero_desc": "We are here to help. Reach out to us for any medical queries, volunteer information, or donations.",
+    "info_title": "Contact Information",
+    "location": "Our Location",
+    "address_text": "P-66 - 15 A, Sector 31A, Allah Wala Town, Korangi, Karachi, 74900, Pakistan",
+    "phones": "Phone Numbers",
+    "email": "Email Address",
+    "hours": "Working Hours",
+    "hours_opd": "General OPD: 9:00 AM - 5:00 PM (Mon-Sat)",
+    "hours_emergency": "Emergency: 24/7 Available",
+    "form_title": "Send us a Message",
+    "name": "Name",
+    "phone": "Phone",
+    "email_label": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "placeholders": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "message": "How can we help you?"
+    }
+  },
+  "DonatePage": {
+    "hero_title": "Your Contribution Saves Lives",
+    "hero_desc": "Every donation helps us provide essential healthcare services, medical camps, and preventive care to those who need it most.",
+    "select_title": "Select Donation Amount",
+    "select_desc": "Your generosity powers our mission.",
+    "custom_amount": "Enter custom amount",
+    "donate_card": "Donate via Credit/Debit Card",
+    "bank_transfer": "Bank Transfer Details",
+    "secure": "100% Secure",
+    "tax": "Tax Deductible",
+    "transparent": "Transparent Impact",
+    "option_bank_transfer": "Bank Transfer (Official)",
+    "option_online_payment": "Online Payment (Future Gateway)",
+    "bank_title": "Direct Bank Transfer",
+    "bank_subtitle": "Official BankIslami Pakistan Ltd. Account",
+    "account_name_label": "Account Name",
+    "account_name": "JAMILA SULTAN WELFARE SOCIETY",
+    "bank_name_label": "Bank Name",
+    "bank_name": "BankIslami Pakistan Ltd.",
+    "iban_label": "IBAN Number",
+    "iban": "PK62BKIP0103600357930001",
+    "swift_label": "SWIFT Code",
+    "swift": "BKIPPKKA",
+    "copy_iban": "Copy IBAN",
+    "iban_copied": "IBAN Copied!",
+    "copy_account_name": "Copy Account Name",
+    "account_copied": "Account Name Copied!",
+    "download_details": "Download Bank Details",
+    "downloaded_success": "Bank details downloaded!",
+    "receipt_note": "After making your donation, you may optionally share your payment receipt so we can acknowledge your generous contribution.",
+    "share_receipt_whatsapp": "Share Receipt on WhatsApp",
+    "share_receipt_email": "Email Payment Receipt",
+    "online_coming_soon_title": "Pay Online (Coming Soon)",
+    "online_coming_soon_desc": "Payment gateway integrations (PayFast, Safepay, PayPro, Raast Direct) are currently being set up.",
+    "placeholders_debit_credit": "Debit / Credit Cards (Visa, Mastercard)",
+    "placeholders_raast": "Raast Instant Payments",
+    "placeholders_google_pay": "Google Pay",
+    "placeholders_apple_pay": "Apple Pay",
+    "placeholders_wallets": "Mobile Wallets (EasyPaisa & JazzCash)",
+    "reassurance_text": "100% of donations are used to support healthcare, medicines, education, and welfare initiatives for deserving patients and families.",
+    "security_badge": "Secure Donation • Official JSWS Bank Account",
+    "modal_title": "Support Jamila Sultan Welfare Society",
+    "modal_desc": "Make a direct impact today through our official secure banking channels."
+  },
+  "LaboratoryPage": {
+    "hero_title_start": "State-of-the-Art ",
+    "hero_title_highlight": "Diagnostic Laboratory",
+    "hero_desc": "Sultan Advanced Reference Center (SARC) provides accurate, reliable, and timely diagnostic services using the latest medical equipment and certified pathologists.",
+    "download_report": "Download Report",
+    "view_tests": "View All Tests",
+    "report_title": "Online Report Download",
+    "report_desc": "Access your medical reports securely from the comfort of your home. Enter your MR number and password provided on your receipt.",
+    "mr_number": "MR Number",
+    "password": "Password",
+    "access": "Access",
+    "tests_title": "Available Tests & Profiles",
+    "tests_desc": "We offer a comprehensive menu of routine and specialized tests at highly subsidized rates.",
+    "tests": {
+      "0": "Complete Blood Count (CBC)",
+      "1": "Liver Function Test (LFT)",
+      "2": "Kidney Function Test (KFT)",
+      "3": "Lipid Profile",
+      "4": "Thyroid Profile",
+      "5": "Blood Sugar (Fasting/Random)",
+      "6": "HbA1c",
+      "7": "Vitamin D & B12",
+      "8": "Hormonal Assays",
+      "9": "Infectious Disease Screening"
+    }
+  },
+  "VolunteerPage": {
+    "hero_title": "Join Our Mission",
+    "hero_desc": "Become a JSWS Volunteer and make a tangible difference in the lives of underserved communities.",
+    "impact_title": "Make an Impact",
+    "impact_desc": "Directly contribute to saving lives and improving health outcomes.",
+    "learn_title": "Learn & Grow",
+    "learn_desc": "Gain valuable experience working alongside medical professionals.",
+    "service_title": "Community Service",
+    "service_desc": "Serve the community by participating in local medical camps.",
+    "form_title": "Volunteer Application",
+    "form_desc": "Fill out the form below and our team will get in touch with you.",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "email": "Email Address",
+    "why": "Why do you want to volunteer?",
+    "submit": "Submit Application",
+    "placeholders": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john@example.com",
+      "why": "Tell us about yourself..."
+    }
+  },
+  "DoctorsPage": {
+    "hero_title": "Our Specialists",
+    "hero_desc": "Meet our highly qualified and experienced medical professionals dedicated to providing the best healthcare services.",
+    "qualifications": "Qualifications",
+    "availability": "Availability",
+    "book": "Book Appointment"
+  },
+  "ServicesPage": {
+    "hero_title": "Comprehensive Healthcare",
+    "hero_desc": "Delivering high-quality, specialized medical services with compassion and professional excellence.",
+    "special_title": "Specialized Care Programs",
+    "special_desc": "Our specialized programs are designed to address the specific health challenges of our community, offering targeted interventions and continuous support.",
+    "consult": "Consult a Specialist",
+    "programs": {
+      "0": "Maternal & Child Health Initiative",
+      "1": "Free Diabetes & Hypertension Clinics",
+      "2": "Hepatitis Screening & Vaccination Drive",
+      "3": "Nutritional Support for Undernourished Children",
+      "4": "Mobile Medical Camps for Remote Areas"
+    }
+  },
+  "ChatWidget": {
+    "title": "JSWS Assistant",
+    "welcome_message": "Hi! Ask me anything about JSWS services.",
+    "thinking": "Thinking...",
+    "input_placeholder": "Type your message..."
+  },
+  "Donations": {
+    "categories": {
+      "zakat": "Zakat",
+      "sadqah": "Sadqah",
+      "general": "General Donation",
+      "patient": "Sponsor a Patient",
+      "clinic": "Sponsor a Clinic",
+      "medicines": "Sponsor Medicines",
+      "equipment": "Sponsor Equipment"
+    },
+    "descriptions": {
+      "zakat": "Fulfill your religious obligation by supporting deserving patients.",
+      "sadqah": "Give charity to ease the suffering of others and gain spiritual reward.",
+      "general": "Support our overall operations and development.",
+      "patient": "Cover the complete medical expenses of a needy patient.",
+      "clinic": "Adopt a clinic and fund its daily operations and supplies.",
+      "medicines": "Provide essential medicines for those who cannot afford them.",
+      "equipment": "Help us acquire critical medical equipment."
+    },
+    "donate": "Donate"
+  },
+  "HomeProjects": {
+    "jsmdc": {
+      "title": "Jamila Sultan Medical & Dental Centre (JSMDC)",
+      "services": [
+        "Medical and Dental Services",
+        "Specialist Doctors",
+        "Diagnostics",
+        "Laboratory",
+        "Pharmacy",
+        "Departments",
+        "Appointment"
+      ]
+    },
+    "sarc": {
+      "title": "Sultan Ahmed Rehabilitation Centre (SARC)",
+      "services": [
+        "Physiotherapy",
+        "Speech Therapy",
+        "Occupational Therapy",
+        "Psychology",
+        "Adult Rehabilitation",
+        "Pediatric Rehabilitation",
+        "Patient Gym"
+      ]
+    },
+    "sasp": {
+      "title": "Sultan Ahmed Scholarship Program (SASP)",
+      "services": [
+        "Scholarships",
+        "Eligibility",
+        "Application Process",
+        "Student Support"
+      ]
+    },
+    "awareness": {
+      "title": "Awareness Programs",
+      "services": [
+        "Health Awareness Campaigns",
+        "Blood Donation Drives",
+        "Medical Camps",
+        "Community Activities",
+        "Seminars"
+      ]
+    },
+    "future": {
+      "title": "Dialysis Centre",
+      "subtitle": "Coming Soon",
+      "desc": "Future Expansion Project"
+    }
+  }
+}
