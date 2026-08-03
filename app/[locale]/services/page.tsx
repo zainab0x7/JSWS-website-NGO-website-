@@ -9,7 +9,6 @@ import Link from"next/link";
 import { useTranslations } from "next-intl";
 
 import { GeneralPhysicianSection } from "@/components/services/GeneralPhysicianSection";
-
 export default function ServicesPage() {
   const t = useTranslations("ServicesPage");
  return (

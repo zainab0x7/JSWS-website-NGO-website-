@@ -188,7 +188,6 @@ export default function DonatePage() {
 
       {/* Shariah Certificate & Zakat Compliance Section */}
       <ShariahCertificateSection />
-
       {/* Main Donation Options Hub */}
       <section id="donation-options" className="py-16 bg-white scroll-mt-24">
         <div className="container mx-auto px-4 md:px-6 max-w-5xl space-y-10">

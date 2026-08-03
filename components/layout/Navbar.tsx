@@ -67,6 +67,7 @@ export function Navbar() {
     { href: "/about", label: t('about') },
     { id: "programs", label: t('programs'), type: "dropdown", items: programsDropdown },
     { id: "donate", label: t('donate_dropdown'), type: "dropdown", items: donateDropdown },
+
     { href: "/registration", label: t('registration') },
     { href: "/gallery", label: t('gallery') },
     { href: "/contact", label: t('contact') },
