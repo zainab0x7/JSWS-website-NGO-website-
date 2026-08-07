@@ -177,8 +177,8 @@
     "phones": "Phone Numbers",
     "email": "Email Address",
     "hours": "Working Hours",
-    "hours_opd": "General OPD: 9:00 AM - 5:00 PM (Mon-Sat)",
-    "hours_emergency": "Emergency: 24/7 Available",
+    "hours_opd": "General OPD: Monday to saturday",
+    "hours_emergency": "No Emergency: EMERGENCY SERVICES ARE NOT AVAILABLE",
     "form_title": "Send us a Message",
     "name": "Name",
     "phone": "Phone",
@@ -381,6 +381,80 @@
       "title": "Dialysis Centre",
       "subtitle": "Coming Soon",
       "desc": "Future Expansion Project"
+    }
+  },
+  "JSMDCPage": {
+    "hero": {
+      "badge": "Primary Healthcare Facility of JSWS",
+      "title": "Jamila Sultan Medical & Dental Centre (JSMDC)",
+      "desc": "Providing free and highly subsidized OPD consultations, dental procedures, maternal care, and life-saving medicines to deserving families in Korangi, Karachi.",
+      "appointmentsBtn": "OPD Appointments & Helpline",
+      "sponsorBtn": "Sponsor Clinic Operations"
+    },
+    "departments": {
+      "title": "Clinical Departments & OPD Services",
+      "subtitle": "Equipped with modern medical equipment and compassionate doctors.",
+      "items": {
+        "opd": {
+          "title": "General Outpatient (OPD)",
+          "desc": "Daily medical consultations by senior physicians for acute and chronic conditions.",
+          "timing": "Monday to Saturday"
+        },
+        "dental": {
+          "title": "Dental Care Clinic",
+          "desc": "Dental cleanings, extractions, fillings, root canals, and oral hygiene education.",
+          "timing": "Monday to Saturday"
+        },
+        "gynecology": {
+          "title": "Gynecology & Maternal Care",
+          "desc": "Prenatal care, postnatal checkups, routine screening, and women's health counseling.",
+          "timing": "Monday to Saturday"
+        },
+        "pediatric": {
+          "title": "Pediatric Health Care",
+          "desc": "Specialized medical attention for children, infant checkups, and nutritional guidance.",
+          "timing": "Monday to Saturday"
+        },
+        "pharmacy": {
+          "title": "Free Medicine Pharmacy",
+          "desc": "Full dispensing of prescribed medications completely free for deserving patients.",
+          "timing": "Monday to Saturday"
+        },
+        "diagnostic": {
+          "title": "Diagnostic Ultrasound & X-Ray",
+          "desc": "Subsidized diagnostic imaging and fast turnaround report delivery.",
+          "timing": "Monday to Saturday"
+        }
+      }
+    },
+    "gallery": {
+      "badge": "JSMDC OPD Facilities",
+      "title": "General Physician Clinic in Action",
+      "desc": "Real photos from our General Physician consultation OPD rooms at JSMDC.",
+      "images": {
+        "1": "GP Consultation Room 1",
+        "2": "Patient Examination & Care",
+        "3": "General Physician OPD",
+        "4": "Prescription & Guidance",
+        "5": "Subsidized Clinic",
+        "6": "100% Free Medicines"
+      }
+    },
+    "zakat": {
+      "title": "No Deserving Patient Left Untreated",
+      "desc": "At JSMDC, financial constraint should never prevent anyone from getting quality care. Deserving patients receive consultation, diagnosis, and full course of prescription medicines free of charge through Zakat & Sadqah funds.",
+      "points": {
+        "1": "Free OPD Consultations for Zakat Eligible",
+        "2": "Subsidized Lab & Diagnostic Tests",
+        "3": "Quality Assured Brand & Generic Medicines"
+      }
+    },
+    "visit": {
+      "title": "Visit JSMDC Clinic",
+      "address": "P-66 - 15 A, Sector 31A, Allah Wala Town, Korangi, Karachi",
+      "helpline": "Helpline: +92 307 2021882",
+      "timing": "Monday to Saturday",
+      "sponsorBtn": "Sponsor a Needy Patient Today"
     }
   }
 }
