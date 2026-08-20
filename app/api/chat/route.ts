@@ -14,7 +14,7 @@ Key Information about JSWS:
 2. **Programs & Services**:
    - **SARC** (Sultan Ahmed Rehabilitation Centre): Provides rehabilitation and physical therapy.
    - **JSMDC** (Jamila Sultan Medical & Dental Clinic): Offers quality medical and dental services.
-   - **Educational Scholarships**: (SASP) Support for students.
+   - **MASP** (Muhammad Aslam Scholarship Program): Educational scholarships for deserving students.
    - **Health Awareness Drives**: Community awareness campaigns.
 3. **Donations**:
    - People can donate via Zakat, Sadqah, or General Donations.

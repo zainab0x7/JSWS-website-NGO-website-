@@ -3,126 +3,197 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
-import { ArrowRight, Pill, HeartPulse, Eye, Stethoscope, HeartHandshake, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Pill,
+  HeartPulse,
+  Eye,
+  Stethoscope,
+  HeartHandshake,
+  ShieldCheck,
+} from "lucide-react";
 import { DonateModal } from "@/components/donate/DonateModal";
+import { GlassCard } from "@/components/premium/GlassCard";
+import { PremiumBackground } from "@/components/premium/PremiumBackground";
+
+const DepthText = dynamic(
+  () => import("@/components/premium/DepthText"),
+  { ssr: false }
+);
+
+const HeroScene = dynamic(
+  () => import("@/components/premium/HeroScene").then((mod) => mod.HeroScene),
+  { ssr: false }
+);
 
 export function Hero() {
   const t = useTranslations("Hero");
   const [isDonateModalOpen, setIsDonateModalOpen] = useState(false);
 
   const highlightCards = [
-    { icon: Pill, text: t('cards.medicines') },
-    { icon: HeartPulse, text: t('cards.healthcare') },
-    { icon: Eye, text: t('cards.eye') },
-    { icon: Stethoscope, text: t('cards.dental') }
+    { icon: Pill, text: t("cards.medicines") },
+    { icon: HeartPulse, text: t("cards.healthcare") },
+    { icon: Eye, text: t("cards.eye") },
+    { icon: Stethoscope, text: t("cards.dental") },
   ];
+
+  const titleHighlight = t("title_highlight").trim();
 
   return (
     <>
-      <section className="relative min-h-[92vh] flex flex-col justify-center overflow-hidden pt-28 pb-16 bg-gray-950 text-white">
-        {/* Background Image with Layered Gradient Overlays */}
+      <section className="relative flex min-h-[calc(100svh-4.5rem)] flex-col justify-center overflow-hidden bg-gray-950 py-8 sm:py-10 md:py-12 text-white">
+        <PremiumBackground variant="dark" />
+
         <div className="absolute inset-0 z-0">
-          <img 
-            src="/hero.jpg" 
-            alt="JSWS Hero" 
-            className="w-full h-full object-cover opacity-35 scale-105 transition-transform duration-10000 ease-out"
+          <img
+            src="/hero.jpg"
+            alt=""
+            className="h-full w-full scale-105 object-cover opacity-35"
+            aria-hidden
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/40" />
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(181,18,27,0.25),transparent_60%)] pointer-events-none" />
-          <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-gray-950 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/55" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(181,18,27,0.25),transparent_60%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-950 to-transparent" />
         </div>
 
-        {/* Content Container */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col flex-1 justify-center">
-          <div className="max-w-4xl text-left rtl:text-right pt-6">
-            
-            {/* Security Badge */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[42%] opacity-70 lg:block">
+          <HeroScene />
+        </div>
+
+        <div className="container relative z-10 mx-auto flex flex-1 flex-col justify-center px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl text-left rtl:text-right">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-red-500/15 text-red-200 text-xs sm:text-sm font-semibold mb-6 border border-red-500/30 backdrop-blur-xl shadow-lg shadow-red-950/50"
+              transition={{ duration: 0.5 }}
+              className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-red-500/30 bg-red-500/15 px-4 py-2 text-xs font-semibold text-red-200 backdrop-blur-xl sm:text-sm"
             >
               <div className="relative flex h-2.5 w-2.5">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
               </div>
-              <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span>Official & Transparent JSWS Welfare Account</span>
+              <ShieldCheck className="h-4 w-4 text-emerald-400" />
+              <span>{t("badge_official")}</span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+            {/* Title line 1: "Free & Subsidized" */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight tracking-tight mb-5"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="mb-0 font-heading text-xl font-extrabold leading-none tracking-tight text-white sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
             >
-              {t('title_start')}{" "}
-              <span className="bg-gradient-to-r from-red-400 via-rose-300 to-amber-200 bg-clip-text text-transparent block sm:inline drop-shadow-sm">
-                {t('title_highlight')}
-              </span>
-              <br className="hidden sm:block"/>
-              {t('title_end')}
+              {t("title_start")}
+            </motion.h2>
+
+            {/* Title line 2: "Healthcare" — 3D DepthText */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="my-1 sm:my-2"
+            >
+              <DepthText
+                text={titleHighlight}
+                layers={30}
+                depth={2.2}
+                faceColor="#fef2f2"
+                depthColor="#B5121B"
+                tilt={6}
+                pointerTracking
+                autoOrbit
+                orbitSpeed={0.3}
+                smoothing={0.12}
+                perspective={900}
+                fontSize="clamp(2.8rem, 12vw, 7.5rem)"
+                fontWeight={900}
+                shadow
+              />
+            </motion.div>
+
+            {/* Title line 3: "for Deserving Patients" */}
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="mb-6 font-heading text-xl font-extrabold leading-none tracking-tight text-white sm:mb-7 sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+            >
+              {t("title_end")}
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mb-8 leading-relaxed font-normal"
+              transition={{ duration: 0.6, delay: 0.42 }}
+              className="mb-8 max-w-2xl text-sm leading-relaxed text-gray-300 sm:text-base md:text-lg lg:text-xl"
             >
-              {t('description')}
+              {t("description")}
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto mb-16"
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mb-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4 md:mb-14"
             >
-              <Button 
+              <Button
                 onClick={() => setIsDonateModalOpen(true)}
-                size="lg" 
-                className="w-full sm:w-auto rounded-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white px-8 h-14 text-base sm:text-lg font-bold shadow-xl shadow-red-600/40 flex items-center justify-center gap-2.5 transition-all hover:scale-105 active:scale-95"
+                size="lg"
+                className="flex h-14 w-full items-center justify-center gap-2.5 rounded-full bg-gradient-to-r from-red-600 to-red-700 px-8 text-base font-bold text-white shadow-xl shadow-red-600/40 hover:from-red-500 hover:to-red-600 sm:w-auto sm:text-lg"
               >
-                <HeartHandshake className="w-5 h-5 text-red-200" />
-                <span>{t('donate_now') || "Donate Now"}</span>
+                <HeartHandshake className="h-5 w-5 text-red-200" />
+                <span>{t("donate_now") || "Donate Now"}</span>
               </Button>
-              
-              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto rounded-full border-white/30 bg-white/10 text-white hover:bg-white hover:text-gray-950 px-8 h-14 text-base font-semibold backdrop-blur-md transition-all duration-300 group shadow-lg">
+
+              <Button
+                asChild
+                size="lg"
+                variant="outline"
+                className="group flex h-14 w-full items-center justify-center rounded-full border-white/30 bg-white/10 px-8 text-base font-semibold text-white shadow-lg backdrop-blur-md hover:bg-white hover:text-gray-950 sm:w-auto"
+              >
                 <Link href="/doctors">
-                  <span>{t('book_appointment')}</span>
-                  <ArrowRight className="ml-2 w-5 h-5 rtl:rotate-180 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
+                  <span>{t("book_appointment")}</span>
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
                 </Link>
               </Button>
             </motion.div>
           </div>
 
-          {/* Glassmorphic Highlight Cards */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="w-full grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-auto max-w-6xl"
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-auto grid w-full max-w-6xl grid-cols-2 gap-2 sm:gap-3 md:gap-5 lg:grid-cols-4 lg:gap-6"
           >
             {highlightCards.map((card, index) => {
               const Icon = card.icon;
               return (
-                <div key={index} className="bg-white/10 backdrop-blur-xl border border-white/15 p-5 sm:p-6 rounded-2xl sm:rounded-3xl flex flex-col items-start gap-3.5 group hover:bg-white/20 hover:border-white/30 transition-all duration-300 shadow-xl hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-red-600 to-red-800 text-white flex items-center justify-center group-hover:scale-110 transition-transform shadow-md shadow-red-900/50">
-                    <Icon className="w-6 h-6" />
-                  </div>
-                  <span className="text-sm sm:text-base font-bold text-white leading-snug">{card.text}</span>
-                </div>
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.32 + index * 0.08 }}
+                >
+                  <GlassCard dark tilt={false} className="p-4 sm:p-5 md:p-6">
+                    <div className="flex flex-col items-start gap-2.5 sm:gap-3.5">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-600 to-red-800 text-white shadow-md shadow-red-900/50 sm:h-12 sm:w-12 sm:rounded-2xl">
+                        <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                      </div>
+                      <span className="text-xs font-bold leading-snug text-white sm:text-sm md:text-base">
+                        {card.text}
+                      </span>
+                    </div>
+                  </GlassCard>
+                </motion.div>
               );
             })}
           </motion.div>
         </div>
       </section>
 
-      {/* Donate Modal Triggered by Hero */}
       <DonateModal
         isOpen={isDonateModalOpen}
         onClose={() => setIsDonateModalOpen(false)}

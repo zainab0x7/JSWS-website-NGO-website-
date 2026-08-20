@@ -1,16 +1,15 @@
 import React, { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
-export interface BidiLTRProps extends React.HTMLAttributes<HTMLElement> {
+export interface BidiLTRProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: React.ReactNode;
   className?: string;
-  as?: React.ElementType;
 }
 
-export const BidiLTR = forwardRef<HTMLElement, BidiLTRProps>(
-  ({ children, className, as: Component = "span", ...props }, ref) => {
+export const BidiLTR = forwardRef<HTMLSpanElement, BidiLTRProps>(
+  ({ children, className, ...props }, ref) => {
     return (
-      <Component
+      <span
         ref={ref}
         dir="ltr"
         className={cn("inline-block bidi-ltr [direction:ltr] [unicode-bidi:isolate]", className)}
@@ -18,7 +17,7 @@ export const BidiLTR = forwardRef<HTMLElement, BidiLTRProps>(
         {...props}
       >
         {children}
-      </Component>
+      </span>
     );
   }
 );

@@ -9,6 +9,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import ChatWidget from '@/components/ChatWidget';
+import { SmoothScroll } from '@/components/premium/SmoothScroll';
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -51,21 +52,18 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={dir}
-      className={`${playfair.variable} ${inter.variable} ${notoUrdu.variable} h-full antialiased`}
+      className={`${playfair.variable} ${inter.variable} ${notoUrdu.variable} h-full antialiased light`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-            <ChatWidget />
+          <ThemeProvider>
+            <SmoothScroll>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+              <Footer />
+              <ChatWidget />
+            </SmoothScroll>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

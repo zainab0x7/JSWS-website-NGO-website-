@@ -29,7 +29,7 @@ export default function ScholarshipsPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen pt-20 bg-gray-50/70">
+    <div className="flex min-h-screen flex-col bg-gray-50/70">
       {/* Hero Banner */}
       <section className="relative py-24 bg-sky-950 text-white overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -54,7 +54,7 @@ export default function ScholarshipsPage() {
             </div>
 
             <h1 className="font-heading text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">
-              Sultan Ahmed Scholarship Program (SASP)
+              Muhammad Aslam Scholarship Program (MASP)
             </h1>
 
             <p className="text-gray-200 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
@@ -125,7 +125,7 @@ export default function ScholarshipsPage() {
                 Online Application
               </span>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold text-gray-900">
-                SASP Scholarship Form
+                MASP Scholarship Form
               </h3>
               <p className="text-xs sm:text-sm text-gray-500">
                 Fill out the details below. Our educational committee will review and contact you.
@@ -137,7 +137,7 @@ export default function ScholarshipsPage() {
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h4 className="font-heading text-xl font-bold">Application Submitted Successfully!</h4>
                 <p className="text-sm text-gray-600">
-                  Thank you for submitting your scholarship request. Our SASP Education Board will verify your documents and contact your family shortly.
+                  Thank you for submitting your scholarship request. Our MASP Education Board will verify your documents and contact your family shortly.
                 </p>
               </div>
             ) : (

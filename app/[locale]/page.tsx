@@ -6,11 +6,12 @@ import { AboutSection } from "@/components/home/AboutSection";
 import { StatsSection } from "@/components/home/StatsSection";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { HealthAwareness } from "@/components/home/HealthAwareness";
+import { GalleryHighlights } from "@/components/home/GalleryHighlights";
 import { MapSection } from "@/components/home/MapSection";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <Hero />
       <ProjectsSection />
       <ServicesSection />
@@ -18,6 +19,7 @@ export default function Home() {
       <AboutSection />
       <StatsSection />
       <WhyChooseUs />
+      <GalleryHighlights />
       <HealthAwareness />
       <MapSection />
     </div>

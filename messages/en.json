@@ -22,7 +22,7 @@
     "programs": "Programs",
     "jsmdc_full": "Jamila Sultan Medical & Dental Centre (JSMDC)",
     "sarc_full": "Sultan Ahmed Rehabilitation Centre (SARC)",
-    "sasp_full": "Sultan Ahmed Scholarship Program (SASP)",
+    "masp_full": "Muhammad Aslam Scholarship Program (MASP)",
     "dialysis": "Dialysis Centre (Coming Soon)",
     "donate_dropdown": "Donate",
     "zakat": "Zakat",
@@ -39,24 +39,28 @@
   },
   "Hero": {
     "badge": "Jamila Sultan Welfare Society",
-    "title_start": "Free & Subsidized ",
-    "title_highlight": "Healthcare\n",
+    "badge_official": "Registered Since 2016 • Serving with Integrity",
+    "title_start": "Free & Subsidized",
+    "title_highlight": "Healthcare",
     "title_end": "for Deserving Patients",
-    "description": "Providing quality healthcare services with dignity, compassion, and hope.",
-    "book_appointment": "Book Appointment",
+    "description": "From free medical consultations and life-saving medicines to physical rehabilitation and education scholarships — JSWS stands as a beacon of hope for underserved communities across Karachi, treating every patient with the dignity they deserve.",
+    "book_appointment": "Book Free Appointment",
     "donate_now": "Donate Now",
     "become_volunteer": "Become Volunteer",
     "cards": {
-      "medicines": "Free Medicines Distribution",
-      "healthcare": "Subsidized Healthcare",
-      "eye": "Eye Treatment",
-      "dental": "Medical & Dental Care"
+      "medicines": "100% Free Pharmacy",
+      "healthcare": "Expert Medical Care",
+      "eye": "Vision & Eye Surgery",
+      "dental": "Rehab & Physical Therapy"
     }
   },
   "AboutSection": {
     "badge": "About JSWS",
     "title": "Our Best Way Everyday",
     "description": "To build a healthy, educated, and empowered society where everyone has equal access to quality healthcare and welfare services. We are driven by compassion and the belief that healthcare is a fundamental human right.",
+    "years_count": "15+",
+    "years_title": "Years of Community Service",
+    "years_desc": "Empowering families with quality healthcare & welfare",
     "features": {
       "professional_care": "Professional Care",
       "professional_care_desc": "Our team consists of qualified and experienced healthcare professionals dedicated to excellence.",
@@ -121,7 +125,36 @@
   "HealthAwareness": {
     "badge": "Health Education",
     "title": "Health Awareness & Tips",
-    "view_all": "View All Articles"
+    "view_all": "View All Articles",
+    "read_article": "Read Article",
+    "articles": {
+      "1": {
+        "title": "Understanding Preventive Healthcare",
+        "excerpt": "Why regular checkups are essential for long-term health and early disease detection.",
+        "date": "July 12, 2026",
+        "read_time": "5 min read",
+        "category": "Prevention"
+      },
+      "2": {
+        "title": "Nutrition for Children's Growth",
+        "excerpt": "Essential nutrients every growing child needs for optimal physical and mental development.",
+        "date": "July 5, 2026",
+        "read_time": "4 min read",
+        "category": "Children"
+      },
+      "3": {
+        "title": "Managing Hypertension Effectively",
+        "excerpt": "Lifestyle changes and medical approaches to keep your blood pressure in check.",
+        "date": "June 28, 2026",
+        "read_time": "6 min read",
+        "category": "Heart Health"
+      }
+    }
+  },
+  "GalleryHighlights": {
+    "badge": "Our Gallery",
+    "title": "Moments of Hope & Healing",
+    "view_all": "View Full Gallery"
   },
   "Footer": {
     "description": "Jamila Sultan Welfare Society is committed to providing accessible healthcare, preventive medicine, and community welfare for underserved families across Pakistan.",
@@ -142,7 +175,7 @@
       "registration": "Registration & Documents",
       "jsmdc": "JSMDC Medical Centre",
       "sarc": "SARC Autism & Rehab",
-      "scholarships": "Scholarship Program",
+      "scholarships": "Muhammad Aslam Scholarship Program (MASP)",
       "awareness": "Health Awareness Drives",
       "gallery": "Photo Gallery",
       "general": "General Consultation",
@@ -334,6 +367,16 @@
     "donate": "Donate"
   },
   "HomeProjects": {
+    "badge": "Flagship Welfare Initiatives",
+    "section_title": "Our Core Programs & Projects",
+    "section_description": "Delivering accessible healthcare, rehabilitation, educational scholarships, and community health drives.",
+    "explore_btn": "Explore Program Details",
+    "badges": {
+      "jsmdc": "Medical & Dental",
+      "sarc": "Rehabilitation",
+      "masp": "Education",
+      "awareness": "Community Health"
+    },
     "jsmdc": {
       "title": "Jamila Sultan Medical & Dental Centre (JSMDC)",
       "services": [
@@ -358,13 +401,13 @@
         "Patient Gym"
       ]
     },
-    "sasp": {
-      "title": "Sultan Ahmed Scholarship Program (SASP)",
+    "masp": {
+      "title": "Muhammad Aslam Scholarship Program (MASP)",
       "services": [
-        "Scholarships",
-        "Eligibility",
+        "Merit & Need-Based Scholarships",
+        "Tuition & Exam Support",
         "Application Process",
-        "Student Support"
+        "Student Mentorship"
       ]
     },
     "awareness": {
@@ -380,8 +423,24 @@
     "future": {
       "title": "Dialysis Centre",
       "subtitle": "Coming Soon",
-      "desc": "Future Expansion Project"
+      "desc": "Future Expansion Project",
+      "support_btn": "Support Expansion Project"
     }
+  },
+  "MapSection": {
+    "visit_badge": "Visit Our Clinics",
+    "title": "Jamila Sultan Welfare Society Clinics",
+    "address": "P-66 - 15 A, Sector 31A, Allah Wala Town, Korangi, Karachi, 74900, Pakistan",
+    "phone_label": "OPD & Helpline:",
+    "location_label": "Karachi, Sector 31A Korangi",
+    "directions_btn": "Get Live Directions"
+  },
+  "FooterCommon": {
+    "operational_arms": "Our Operational Arms",
+    "programs_initiatives": "Programs & Initiatives",
+    "donate_zakat": "Donate & Zakat",
+    "registration_credentials": "Registration Credentials",
+    "registration_no": "Registration No: KAR No. 214 of 2016-17"
   },
   "JSMDCPage": {
     "hero": {

@@ -1,6 +1,10 @@
+"use client";
+
 import { Link } from "@/i18n/routing";
 import { Mail, Phone, MapPin, ShieldCheck, HeartHandshake, Award, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { BidiLTR } from "@/components/ui/BidiLTR";
 
 const Facebook = (props: React.SVGProps<SVGSVGElement>) => (
@@ -21,6 +25,14 @@ const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
 
 export function Footer() {
   const t = useTranslations('Footer');
+  const tc = useTranslations('FooterCommon');
+
+  const operationalArms = [
+    { href: "/sarc" as const, logo: "/sarc-logo.png", alt: "SARC Logo" },
+    { href: "/jsmdc" as const, logo: "/jsmdc-logo.png", alt: "JSMDC Logo" },
+    { href: "/awareness" as const, logo: "/cap.png", alt: "CAP Logo" },
+    { href: "/scholarships" as const, logo: "/masp.png", alt: "MASP Logo" },
+  ];
 
   return (
     <footer className="bg-white text-gray-900 pt-16 pb-10 border-t border-gray-200">
@@ -42,15 +54,15 @@ export function Footer() {
 
             {/* Child Initiatives Logos */}
             <div className="space-y-2 pt-1">
-              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">Our Operational Arms</p>
-              <div className="inline-flex flex-row items-center gap-4 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-200 shadow-sm">
-                <Link href="/sarc">
-                  <img src="/sarc-logo.png" alt="SARC Logo" className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform" />
-                </Link>
-                <div className="w-px h-7 bg-gray-300" />
-                <Link href="/jsmdc">
-                  <img src="/jsmdc-logo.png" alt="JSMDC Logo" className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform" />
-                </Link>
+              <p className="text-xs font-bold uppercase tracking-wider text-[var(--color-primary)]">{tc('operational_arms')}</p>
+              <div className="inline-flex flex-wrap items-center gap-3 bg-gray-50 px-4 py-2.5 rounded-2xl border border-gray-200 shadow-sm">
+                {operationalArms.map((arm, idx) => (
+                  <motion.div key={idx} whileHover={{ scale: 1.08, y: -2 }} transition={{ type: "spring", stiffness: 400 }}>
+                    <Link href={arm.href} className="block">
+                      <Image src={arm.logo} alt={arm.alt} width={0} height={0} sizes="96px" className="h-10 sm:h-12 w-auto object-contain" />
+                    </Link>
+                  </motion.div>
+                ))}
               </div>
             </div>
 
@@ -101,7 +113,7 @@ export function Footer() {
           {/* Initiatives & Programs (Cols: 3) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="font-heading text-sm font-bold uppercase tracking-wider text-[var(--color-primary)] border-b border-gray-200 pb-2">
-              Programs & Initiatives
+              {tc('programs_initiatives')}
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-gray-600">
               {[
@@ -110,7 +122,7 @@ export function Footer() {
                 { href: "/scholarships", label: t('links.scholarships') },
                 { href: "/awareness", label: t('links.awareness') },
                 { href: "/gallery", label: t('links.gallery') },
-                { href: "/donate", label: "Donate & Zakat" },
+                { href: "/donate", label: tc('donate_zakat') },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link href={link.href} className="hover:text-red-400 transition-colors inline-flex items-center gap-1.5 py-0.5">
@@ -156,7 +168,7 @@ export function Footer() {
           </div>
           <div className="flex items-center gap-3 text-gray-900 font-semibold">
             <Award className="w-4 h-4 shrink-0 text-[var(--color-primary)]" />
-            <span>Registration No: KAR No. 214 of 2016-17</span>
+            <span>{tc('registration_no')}</span>
           </div>
         </div>
 
@@ -168,7 +180,7 @@ export function Footer() {
           <div className="flex items-center gap-6 font-medium">
             <Link href="/privacy" className="hover:text-[var(--color-primary)] transition-colors">{t('privacy')}</Link>
             <Link href="/terms" className="hover:text-[var(--color-primary)] transition-colors">{t('terms')}</Link>
-            <Link href="/registration" className="hover:text-[var(--color-primary)] transition-colors">Registration Credentials</Link>
+            <Link href="/registration" className="hover:text-[var(--color-primary)] transition-colors">{tc('registration_credentials')}</Link>
           </div>
         </div>
       </div>

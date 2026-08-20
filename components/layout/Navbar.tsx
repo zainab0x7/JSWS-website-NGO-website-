@@ -4,7 +4,7 @@ import * as React from "react";
 import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown, Activity, Stethoscope, GraduationCap, Megaphone, Pill, HandCoins, Heart, Hospital, ShieldPlus, HeartHandshake } from "lucide-react";
+import { Menu, X, ChevronDown, Activity, Stethoscope, GraduationCap, Megaphone, Pill, HandCoins, Heart, Hospital, ShieldPlus, HeartHandshake, type LucideIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
@@ -38,7 +38,7 @@ export function Navbar() {
   interface NavDropdownItem {
     href: string;
     label: string;
-    icon: React.ElementType;
+    icon: LucideIcon;
     desc?: string;
     disabled?: boolean;
     cause?: string;
@@ -47,7 +47,7 @@ export function Navbar() {
   const programsDropdown: NavDropdownItem[] = [
     { href: "/jsmdc", label: t('jsmdc_full'), icon: Stethoscope, desc: "Medical and Dental Services" },
     { href: "/sarc", label: t('sarc_full'), icon: Activity, desc: "Rehabilitation & Therapy" },
-    { href: "/scholarships", label: t('sasp_full'), icon: GraduationCap, desc: "Educational Support" },
+    { href: "/scholarships", label: t('masp_full'), icon: GraduationCap, desc: "Muhammad Aslam Scholarship Program" },
     { href: "/awareness", label: t('awareness'), icon: Megaphone, desc: "Community Health Drives" },
     { href: "#", label: t('dialysis'), icon: ShieldPlus, desc: "Future Expansion Project", disabled: true },
   ];
