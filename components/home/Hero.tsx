@@ -48,18 +48,25 @@ export function Hero() {
         <PremiumBackground variant="dark" />
 
         <div className="absolute inset-0 z-0">
-          <img
-            src="/hero.jpg"
-            alt=""
-            className="h-full w-full scale-105 object-cover opacity-35"
-            aria-hidden
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/90 to-gray-950/55" />
+          <video
+            className="h-full w-full scale-105 object-cover opacity-20"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/hero.jpg"
+            aria-hidden="true"
+          >
+            <source src="/jsws-tour.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/85 to-gray-950/50" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(181,18,27,0.25),transparent_60%)]" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-950 to-transparent" />
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[42%] opacity-70 lg:block">
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[42%] overflow-hidden opacity-70 lg:block">
+          <div className="absolute inset-0 bg-gradient-to-l from-gray-950/60 via-transparent to-transparent" />
           <HeroScene />
         </div>
 

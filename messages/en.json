@@ -86,8 +86,8 @@
         "description": "Free medical camps in underserved communities providing essential healthcare."
       },
       "laboratory": {
-        "title": "Laboratory (SARC)",
-        "description": "State-of-the-art diagnostic services ensuring accurate and timely test results."
+        "title": "AMTF Laboratory Collection Point",
+        "description": "State-of-the-art diagnostic and healthcare services ensuring accurate, reliable, and timely results."
       },
       "womens_health": {
         "title": "Women's Health",
@@ -270,9 +270,9 @@
     "modal_desc": "Make a direct impact today through our official secure banking channels."
   },
   "LaboratoryPage": {
-    "hero_title_start": "State-of-the-Art ",
-    "hero_title_highlight": "Diagnostic Laboratory",
-    "hero_desc": "Sultan Advanced Reference Center (SARC) provides accurate, reliable, and timely diagnostic services using the latest medical equipment and certified pathologists.",
+    "hero_title_start": "AMTF ",
+    "hero_title_highlight": "Healthcare Services",
+    "hero_desc": "AMTF Laboratory Collection Point provides accurate, reliable, and timely diagnostic and healthcare services using the latest medical equipment and certified pathologists.",
     "download_report": "Download Report",
     "view_tests": "View All Tests",
     "report_title": "Online Report Download",
@@ -280,8 +280,8 @@
     "mr_number": "MR Number",
     "password": "Password",
     "access": "Access",
-    "tests_title": "Available Tests & Profiles",
-    "tests_desc": "We offer a comprehensive menu of routine and specialized tests at highly subsidized rates.",
+    "tests_title": "Available Tests & Healthcare Services",
+    "tests_desc": "We offer a comprehensive menu of routine and specialized diagnostic tests and healthcare services at highly subsidized rates.",
     "tests": {
       "0": "Complete Blood Count (CBC)",
       "1": "Liver Function Test (LFT)",
@@ -369,11 +369,13 @@
   "HomeProjects": {
     "badge": "Flagship Welfare Initiatives",
     "section_title": "Our Core Programs & Projects",
-    "section_description": "Delivering accessible healthcare, rehabilitation, educational scholarships, and community health drives.",
+    "section_description": "Delivering accessible healthcare, rehabilitation, diagnostic laboratory, family planning, educational scholarships, and community health drives.",
     "explore_btn": "Explore Program Details",
     "badges": {
       "jsmdc": "Medical & Dental",
       "sarc": "Rehabilitation",
+      "amtf": "Laboratory",
+      "fp": "Family Planning",
       "masp": "Education",
       "awareness": "Community Health"
     },
@@ -399,6 +401,28 @@
         "Adult Rehabilitation",
         "Pediatric Rehabilitation",
         "Patient Gym"
+      ]
+    },
+    "amtf": {
+      "title": "AMTF Laboratory Collection Point",
+      "services": [
+        "State-of-the-Art Diagnostics",
+        "Accurate & Timely Results",
+        "Blood Tests & Pathology",
+        "Urine & Stool Analysis",
+        "Hormone & Thyroid Panels",
+        "Sample Collection Services"
+      ]
+    },
+    "fp": {
+      "title": "Family Planning Clinic",
+      "services": [
+        "Counselling & Guidance",
+        "Maternal Health Services",
+        "Pre & Post-Natal Care",
+        "Contraceptive Counselling",
+        "Reproductive Health Education",
+        "Women's Wellness Checkups"
       ]
     },
     "masp": {

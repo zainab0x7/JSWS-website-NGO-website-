@@ -35,6 +35,26 @@ export function ProjectsSection() {
       badge: t("badges.sarc"),
     },
     {
+      id: "amtf",
+      logo: "/AMTF_logo.png",
+      title: t("amtf.title"),
+      services: t.raw("amtf.services") as string[],
+      href: "/laboratory",
+      color: "from-cyan-600 to-sky-600",
+      lightColor: "bg-cyan-50 border-cyan-100",
+      badge: t("badges.amtf"),
+    },
+    {
+      id: "fp",
+      logo: "/jsws-logo.png",
+      title: t("fp.title"),
+      services: t.raw("fp.services") as string[],
+      href: "/services",
+      color: "from-rose-600 to-pink-600",
+      lightColor: "bg-rose-50 border-rose-100",
+      badge: t("badges.fp"),
+    },
+    {
       id: "masp",
       logo: "/masp.png",
       title: t("masp.title"),
@@ -68,14 +88,18 @@ export function ProjectsSection() {
         />
 
         <ScrollReveal className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 lg:gap-10" stagger={0.12}>
-          {projects.map((project) => (
-            <GlassCard key={project.id} className="group flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className={`${index === projects.length - 1 && projects.length % 2 !== 0 ? "md:col-span-2 md:max-w-[calc(50%-1.25rem)] md:mx-auto" : ""}`}
+            >
+            <GlassCard key={project.id} className={`group flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10 ${project.lightColor.split(" ")[0]}`}>
               <div>
                 <div className="mb-6 flex items-center justify-between gap-3">
                   <motion.div
                     whileHover={{ scale: 1.05, rotate: 2 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className={`flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border p-3 shadow-sm sm:h-28 sm:w-28 ${project.lightColor}`}
+                    className={`flex h-20 w-20 items-center justify-center overflow-hidden rounded-2xl border p-3 shadow-sm sm:h-28 sm:w-28 bg-white ${project.lightColor.split(" ")[1] ?? "border-gray-200"}`}
                   >
                     <Image
                       src={project.logo}
@@ -86,7 +110,7 @@ export function ProjectsSection() {
                       className="h-full w-full object-contain"
                     />
                   </motion.div>
-                  <span className="rounded-full bg-gray-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-gray-600">
+                  <span className="rounded-full bg-white/70 px-3 py-1 text-xs font-bold uppercase tracking-wide text-gray-700">
                     {project.badge}
                   </span>
                 </div>
@@ -113,6 +137,7 @@ export function ProjectsSection() {
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </GlassCard>
+            </div>
           ))}
         </ScrollReveal>
       </div>
