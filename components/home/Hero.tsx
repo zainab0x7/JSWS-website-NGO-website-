@@ -49,7 +49,7 @@ export function Hero() {
 
         <div className="absolute inset-0 z-0">
           <video
-            className="h-full w-full scale-105 object-cover opacity-20"
+            className="h-full w-full scale-105 object-cover opacity-40"
             autoPlay
             muted
             loop
@@ -60,7 +60,7 @@ export function Hero() {
           >
             <source src="/jsws-tour.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950 via-gray-950/85 to-gray-950/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/70 to-gray-950/40" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(181,18,27,0.25),transparent_60%)]" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-950 to-transparent" />
         </div>

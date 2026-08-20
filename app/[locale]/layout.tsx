@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import ChatWidget from '@/components/ChatWidget';
 import { SmoothScroll } from '@/components/premium/SmoothScroll';
+import { CustomCursor } from '@/components/premium/CustomCursor';
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -63,6 +64,7 @@ export default async function RootLayout({
               <main className="flex-1">{children}</main>
               <Footer />
               <ChatWidget />
+              <CustomCursor />
             </SmoothScroll>
           </ThemeProvider>
         </NextIntlClientProvider>
