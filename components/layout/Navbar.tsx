@@ -89,15 +89,20 @@ export function Navbar() {
           isScrolled && "shadow-md bg-white/98 py-0.5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 sm:h-28 flex items-center justify-between gap-2 sm:gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 shrink-0 group" aria-label="JSWS Home">
-            <div className="relative h-12 sm:h-14 group-hover:scale-105 transition-transform">
-              <img
-                src="/jsws-logo.png"
-                alt="JSWS Logo"
-                className="h-full w-auto object-contain"
-              />
+            <div className="flex flex-col items-center">
+              <div className="relative h-16 sm:h-20 md:h-24 group-hover:scale-105 transition-transform">
+                <img
+                  src="/jsws-logo.png"
+                  alt="JSWS Logo"
+                  className="h-full w-auto object-contain"
+                />
+              </div>
+              <span className="text-[10px] sm:text-xs font-semibold text-gray-500 mt-0.5 whitespace-nowrap">
+                Registration No: KAR No. 214 of 2016-17
+              </span>
             </div>
           </Link>
 

@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
 import {
@@ -18,16 +17,6 @@ import {
 import { DonateModal } from "@/components/donate/DonateModal";
 import { GlassCard } from "@/components/premium/GlassCard";
 import { PremiumBackground } from "@/components/premium/PremiumBackground";
-
-const DepthText = dynamic(
-  () => import("@/components/premium/DepthText"),
-  { ssr: false }
-);
-
-const HeroScene = dynamic(
-  () => import("@/components/premium/HeroScene").then((mod) => mod.HeroScene),
-  { ssr: false }
-);
 
 export function Hero() {
   const t = useTranslations("Hero");
@@ -49,7 +38,7 @@ export function Hero() {
 
         <div className="absolute inset-0 z-0">
           <video
-            className="h-full w-full scale-105 object-cover opacity-40"
+            className="h-full w-full scale-105 object-cover opacity-[0.75]"
             autoPlay
             muted
             loop
@@ -60,14 +49,9 @@ export function Hero() {
           >
             <source src="/jsws-tour.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/90 via-gray-950/70 to-gray-950/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-950/85 via-gray-950/55 to-gray-950/25" />
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(181,18,27,0.25),transparent_60%)]" />
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-950 to-transparent" />
-        </div>
-
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-[1] hidden w-[42%] overflow-hidden opacity-70 lg:block">
-          <div className="absolute inset-0 bg-gradient-to-l from-gray-950/60 via-transparent to-transparent" />
-          <HeroScene />
         </div>
 
         <div className="container relative z-10 mx-auto flex flex-1 flex-col justify-center px-4 sm:px-6 lg:px-8">
@@ -96,30 +80,16 @@ export function Hero() {
               {t("title_start")}
             </motion.h2>
 
-            {/* Title line 2: "Healthcare" — 3D DepthText */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.92 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="my-1 sm:my-2"
+            {/* Title line 2: "Healthcare" */}
+            <motion.h2
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="my-1 sm:my-2 font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-black tracking-tight text-white drop-shadow-2xl"
+              style={{ WebkitTextStroke: '1px rgba(181,18,27,0.4)' }}
             >
-              <DepthText
-                text={titleHighlight}
-                layers={30}
-                depth={2.2}
-                faceColor="#fef2f2"
-                depthColor="#B5121B"
-                tilt={6}
-                pointerTracking
-                autoOrbit
-                orbitSpeed={0.3}
-                smoothing={0.12}
-                perspective={900}
-                fontSize="clamp(2.8rem, 12vw, 7.5rem)"
-                fontWeight={900}
-                shadow
-              />
-            </motion.div>
+              {titleHighlight}
+            </motion.h2>
 
             {/* Title line 3: "for Deserving Patients" */}
             <motion.h1

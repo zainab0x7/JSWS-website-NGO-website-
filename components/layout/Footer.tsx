@@ -44,7 +44,7 @@ export function Footer() {
           <div className="lg:col-span-4 space-y-6 text-center sm:text-left">
             <Link href="/" className="inline-block group">
               <div className="bg-white p-2.5 rounded-2xl inline-block shadow-md group-hover:scale-105 transition-transform duration-300">
-                <img src="/jsws-logo.png" alt="JSWS Logo" className="h-14 sm:h-16 w-auto object-contain" />
+                <img src="/jsws-logo.png" alt="JSWS Logo" className="h-20 sm:h-24 md:h-28 w-auto object-contain" />
               </div>
             </Link>
 
