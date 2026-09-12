@@ -12,7 +12,9 @@ import {
   UserCheck, 
   FileText, 
   Send,
-  HeartHandshake
+  HeartHandshake,
+  AlertCircle,
+  Loader2
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -20,7 +22,25 @@ import { BidiLTR } from "@/components/ui/BidiLTR";
 import { Link } from "@/i18n/routing";
 
 export default function ScholarshipsPage() {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    fatherName: "",
+    age: "",
+    gender: "",
+    studentNumber: "",
+    phone: "",
+    guardianPhone: "",
+    address: "",
+    educationLevel: "",
+    institutionName: "",
+    financialNeed: ""
+  });
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submissionError, setSubmissionError] = useState<string | null>(null);
+  const [applicationId, setApplicationId] = useState<string | null>(null);
 
   const criteria = [
     { title: "Merit & Academic Record", desc: "Minimum 65%+ or equivalent B grade in recent examinations." },
@@ -28,6 +48,106 @@ export default function ScholarshipsPage() {
     { title: "Enrolled in Recognized Institution", desc: "School, College, University, or Vocational Technical Training." },
     { title: "Commitment to Community", desc: "Dedication to completing education and helping society." },
   ];
+
+  const validatePakPhone = (phone: string) => {
+    if (!phone) return false;
+    const cleaned = phone.replace(/[\s\-()]/g, "");
+    return /^(?:\+?92|0092|0)?3\d{9}$/.test(cleaned);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors((prev) => {
+        const updated = { ...prev };
+        delete updated[name];
+        return updated;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Student Full Name is required.";
+    }
+    if (!formData.fatherName.trim()) {
+      newErrors.fatherName = "Guardian / Father Name is required.";
+    }
+    const numAge = Number(formData.age);
+    if (!formData.age || isNaN(numAge) || numAge <= 0 || numAge > 120) {
+      newErrors.age = "Please enter a valid age (1-120).";
+    }
+    if (!formData.gender) {
+      newErrors.gender = "Please select gender.";
+    }
+    if (!formData.studentNumber.trim()) {
+      newErrors.studentNumber = "Student / Registration Number is required.";
+    }
+    if (!formData.phone.trim() || !validatePakPhone(formData.phone)) {
+      newErrors.phone = "Valid Pakistani phone number required (e.g. 03001234567).";
+    }
+    if (!formData.guardianPhone.trim() || !validatePakPhone(formData.guardianPhone)) {
+      newErrors.guardianPhone = "Valid Pakistani guardian phone number required (e.g. 03001234567).";
+    }
+    if (!formData.address.trim()) {
+      newErrors.address = "Complete residential address is required.";
+    }
+    if (!formData.educationLevel) {
+      newErrors.educationLevel = "Please select educational level.";
+    }
+    if (!formData.institutionName.trim()) {
+      newErrors.institutionName = "School / College / University Name is required.";
+    }
+    if (!formData.financialNeed.trim()) {
+      newErrors.financialNeed = "Please briefly explain your financial need.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmissionError(null);
+
+    if (!validateForm()) {
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch("/api/scholarship", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          age: Number(formData.age)
+        })
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSubmitted(true);
+        if (data.applicationId) {
+          setApplicationId(data.applicationId);
+        }
+      } else {
+        if (data.details) {
+          setErrors(data.details);
+        }
+        setSubmissionError(data.error || "Failed to submit application. Please check form errors.");
+      }
+    } catch (err) {
+      setSubmissionError("Network error occurred. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50/70">
@@ -139,77 +259,276 @@ export default function ScholarshipsPage() {
             </div>
 
             {submitted ? (
-              <div className="p-8 bg-sky-50 text-sky-900 rounded-2xl text-center space-y-3">
+              <div className="p-8 bg-sky-50 text-sky-900 rounded-2xl text-center space-y-4">
                 <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
                 <h4 className="font-heading text-xl font-bold">Application Submitted Successfully!</h4>
-                <p className="text-sm text-gray-600">
+                {applicationId && (
+                  <p className="text-xs font-mono font-bold bg-sky-100 text-sky-800 py-1.5 px-4 rounded-full inline-block">
+                    Application Ref ID: <BidiLTR>{applicationId}</BidiLTR>
+                  </p>
+                )}
+                <p className="text-sm text-gray-600 max-w-md mx-auto">
                   Thank you for submitting your scholarship request. Our MASP Education Board will verify your documents and contact your family shortly.
                 </p>
+                <div className="pt-2">
+                  <Button
+                    onClick={() => {
+                      setSubmitted(false);
+                      setFormData({
+                        fullName: "",
+                        fatherName: "",
+                        age: "",
+                        gender: "",
+                        studentNumber: "",
+                        phone: "",
+                        guardianPhone: "",
+                        address: "",
+                        educationLevel: "",
+                        institutionName: "",
+                        financialNeed: ""
+                      });
+                      setErrors({});
+                    }}
+                    variant="outline"
+                    className="rounded-xl border-sky-600 text-sky-700 hover:bg-sky-50"
+                  >
+                    Submit Another Application
+                  </Button>
+                </div>
               </div>
             ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-                className="space-y-4"
-              >
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                {submissionError && (
+                  <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-xs sm:text-sm rounded-xl flex items-center gap-2">
+                    <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+                    <span>{submissionError}</span>
+                  </div>
+                )}
+
+                {/* Basic Personal Info */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">Student Full Name</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="e.g. Ali Ahmed" />
+                    <label className="text-xs font-bold text-gray-700">
+                      Student Full Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="fullName"
+                      value={formData.fullName}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.fullName ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="e.g. Ali Ahmed"
+                    />
+                    {errors.fullName && <p className="text-xs text-red-500 font-medium">{errors.fullName}</p>}
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">Guardian / Father Name</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="Father or Guardian Name" />
+                    <label className="text-xs font-bold text-gray-700">
+                      Guardian / Father Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="fatherName"
+                      value={formData.fatherName}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.fatherName ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="Father or Guardian Name"
+                    />
+                    {errors.fatherName && <p className="text-xs text-red-500 font-medium">{errors.fatherName}</p>}
                   </div>
                 </div>
 
+                {/* Age & Gender */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">Gender</label>
+                    <label className="text-xs font-bold text-gray-700">
+                      Age <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="number"
+                      name="age"
+                      min="1"
+                      max="120"
+                      value={formData.age}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.age ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="Enter your age"
+                    />
+                    {errors.age && <p className="text-xs text-red-500 font-medium">{errors.age}</p>}
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700">
+                      Gender <span className="text-red-500">*</span>
+                    </label>
                     <div className="grid grid-cols-2 gap-2">
-                      <label className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 hover:bg-sky-50/50 has-[:checked]:border-sky-600 has-[:checked]:bg-sky-50 has-[:checked]:text-sky-700 font-semibold text-sm cursor-pointer transition-all">
-                        <input required type="radio" name="gender" value="Male" className="accent-sky-600 w-4 h-4" />
+                      <label className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border ${errors.gender ? 'border-red-400 bg-red-50/20' : 'border-gray-200 bg-gray-50'} hover:bg-sky-50/50 has-[:checked]:border-sky-600 has-[:checked]:bg-sky-50 has-[:checked]:text-sky-700 font-semibold text-sm cursor-pointer transition-all`}>
+                        <input
+                          required
+                          type="radio"
+                          name="gender"
+                          value="Male"
+                          checked={formData.gender === "Male"}
+                          onChange={handleChange}
+                          className="accent-sky-600 w-4 h-4"
+                        />
                         <span>Male</span>
                       </label>
-                      <label className="flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 hover:bg-sky-50/50 has-[:checked]:border-sky-600 has-[:checked]:bg-sky-50 has-[:checked]:text-sky-700 font-semibold text-sm cursor-pointer transition-all">
-                        <input required type="radio" name="gender" value="Female" className="accent-sky-600 w-4 h-4" />
+                      <label className={`flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl border ${errors.gender ? 'border-red-400 bg-red-50/20' : 'border-gray-200 bg-gray-50'} hover:bg-sky-50/50 has-[:checked]:border-sky-600 has-[:checked]:bg-sky-50 has-[:checked]:text-sky-700 font-semibold text-sm cursor-pointer transition-all`}>
+                        <input
+                          required
+                          type="radio"
+                          name="gender"
+                          value="Female"
+                          checked={formData.gender === "Female"}
+                          onChange={handleChange}
+                          className="accent-sky-600 w-4 h-4"
+                        />
                         <span>Female</span>
                       </label>
                     </div>
-                  </div>
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">Phone Number (WhatsApp)</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="03001234567" />
+                    {errors.gender && <p className="text-xs text-red-500 font-medium">{errors.gender}</p>}
                   </div>
                 </div>
 
+                {/* Student Number & WhatsApp Phone */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">Educational Level</label>
-                    <select required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600">
-                      <option value="">Select Educational Level</option>
-                      <option>Matriculation / Secondary School</option>
-                      <option>Intermediate / FSc / FA</option>
-                      <option>University / Bachelors Degree</option>
-                      <option>Vocational / Technical Skills</option>
-                    </select>
+                    <label className="text-xs font-bold text-gray-700">
+                      Student Number <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="studentNumber"
+                      value={formData.studentNumber}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.studentNumber ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="Enter student/registration number"
+                    />
+                    {errors.studentNumber && <p className="text-xs text-red-500 font-medium">{errors.studentNumber}</p>}
                   </div>
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-gray-700">School / College / University Name</label>
-                    <input required type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="Institution Name & City" />
+                    <label className="text-xs font-bold text-gray-700">
+                      Phone Number (WhatsApp) <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.phone ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="03001234567"
+                    />
+                    {errors.phone && <p className="text-xs text-red-500 font-medium">{errors.phone}</p>}
                   </div>
                 </div>
 
+                {/* Guardian Contact Number */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-700">Briefly Explain Your Financial Need</label>
-                  <textarea required className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50 text-sm h-28 resize-none focus:outline-none focus:ring-2 focus:ring-sky-600" placeholder="Describe family income and why you need educational scholarship support..." />
+                  <label className="text-xs font-bold text-gray-700">
+                    Student Guardian Contact Number <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    required
+                    type="tel"
+                    name="guardianPhone"
+                    value={formData.guardianPhone}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.guardianPhone ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                    placeholder="Enter guardian's contact number"
+                  />
+                  {errors.guardianPhone && <p className="text-xs text-red-500 font-medium">{errors.guardianPhone}</p>}
                 </div>
 
-                <Button type="submit" className="w-full h-13 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-base shadow-md">
-                  <Send className="w-4 h-4 mr-2" />
-                  Submit Scholarship Application
+                {/* Residential Address */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-gray-700">
+                    Address <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    required
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.address ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm h-24 resize-none focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                    placeholder="Enter your complete residential address"
+                  />
+                  {errors.address && <p className="text-xs text-red-500 font-medium">{errors.address}</p>}
+                </div>
+
+                {/* Educational Level & Institution */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700">
+                      Educational Level <span className="text-red-500">*</span>
+                    </label>
+                    <select
+                      required
+                      name="educationLevel"
+                      value={formData.educationLevel}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.educationLevel ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                    >
+                      <option value="">Select Educational Level</option>
+                      <option value="Matriculation / Secondary School">Matriculation / Secondary School</option>
+                      <option value="Intermediate / FSc / FA">Intermediate / FSc / FA</option>
+                      <option value="University / Bachelors Degree">University / Bachelors Degree</option>
+                      <option value="Vocational / Technical Skills">Vocational / Technical Skills</option>
+                    </select>
+                    {errors.educationLevel && <p className="text-xs text-red-500 font-medium">{errors.educationLevel}</p>}
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700">
+                      School / College / University Name <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="institutionName"
+                      value={formData.institutionName}
+                      onChange={handleChange}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.institutionName ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                      placeholder="Institution Name & City"
+                    />
+                    {errors.institutionName && <p className="text-xs text-red-500 font-medium">{errors.institutionName}</p>}
+                  </div>
+                </div>
+
+                {/* Financial Need Explanation */}
+                <div className="space-y-1.5">
+                  <label className="text-xs font-bold text-gray-700">
+                    Briefly Explain Your Financial Need <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    required
+                    name="financialNeed"
+                    value={formData.financialNeed}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl border ${errors.financialNeed ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm h-28 resize-none focus:outline-none focus:ring-2 focus:ring-sky-600`}
+                    placeholder="Describe family income and why you need educational scholarship support..."
+                  />
+                  {errors.financialNeed && <p className="text-xs text-red-500 font-medium">{errors.financialNeed}</p>}
+                </div>
+
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full h-13 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-base shadow-md disabled:opacity-70"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Submitting Application...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4 mr-2" />
+                      Submit Scholarship Application
+                    </>
+                  )}
                 </Button>
               </form>
             )}
