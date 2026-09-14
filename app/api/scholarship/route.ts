@@ -1,23 +1,5 @@
 import { NextResponse } from "next/server";
-
-// In-memory application store for processed scholarship applications
-interface ScholarshipApplication {
-  id: string;
-  fullName: string;
-  fatherName: string;
-  age: number;
-  gender: string;
-  studentNumber: string;
-  phone: string;
-  guardianPhone: string;
-  address: string;
-  educationLevel: string;
-  institutionName: string;
-  financialNeed: string;
-  submittedAt: string;
-}
-
-const applicationsStore: ScholarshipApplication[] = [];
+import { addScholarshipApplication, ScholarshipApplication } from "@/lib/googleSheets";
 
 // Helper function to validate Pakistani phone number format
 export function isValidPakistaniPhone(phone: string): boolean {
@@ -133,9 +115,21 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString()
     };
 
-    applicationsStore.push(newApplication);
-
     console.log("[MASP Scholarship Application Received]:", newApplication);
+
+    // Save to Google Sheets
+    try {
+      await addScholarshipApplication(newApplication);
+    } catch (sheetError: unknown) {
+      console.error("[Scholarship API Error] Failed to save application to Google Sheets:", sheetError);
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Unable to save scholarship application. Please try again later."
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({
       success: true,
@@ -143,10 +137,14 @@ export async function POST(request: Request) {
       applicationId: newApplication.id
     });
   } catch (error: unknown) {
-    const errorMessage = error instanceof Error ? error.message : "Internal Server Error";
+    console.error("[Scholarship API Internal Error]:", error);
     return NextResponse.json(
-      { success: false, error: errorMessage },
+      {
+        success: false,
+        error: "Unable to save scholarship application. Please try again later."
+      },
       { status: 500 }
     );
   }
 }
+
