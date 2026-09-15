@@ -120,12 +120,14 @@ export async function POST(request: Request) {
     // Save to Google Sheets
     try {
       await addScholarshipApplication(newApplication);
-    } catch (sheetError: unknown) {
+    } catch (sheetError: any) {
       console.error("[Scholarship API Error] Failed to save application to Google Sheets:", sheetError);
       return NextResponse.json(
         {
           success: false,
-          error: "Unable to save scholarship application. Please try again later."
+          error:
+            sheetError?.message ||
+            "Unable to save scholarship application. Please ensure production environment variables (GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_SHEET_ID) are configured in your hosting settings."
         },
         { status: 500 }
       );
@@ -136,15 +138,14 @@ export async function POST(request: Request) {
       message: "Scholarship application submitted and saved successfully.",
       applicationId: newApplication.id
     });
-  } catch (error: unknown) {
+  } catch (error: any) {
     console.error("[Scholarship API Internal Error]:", error);
     return NextResponse.json(
       {
         success: false,
-        error: "Unable to save scholarship application. Please try again later."
+        error: error?.message || "Unable to save scholarship application. Please try again later."
       },
       { status: 500 }
     );
   }
 }
-

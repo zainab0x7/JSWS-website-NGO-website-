@@ -18,7 +18,7 @@ export interface ScholarshipApplication {
 
 /**
  * Appends a new scholarship application row to the Google Spreadsheet.
- * Credentials and sheet configuration are read strictly from environment variables.
+ * Credentials and sheet configuration are read strictly from server-side environment variables.
  */
 export async function addScholarshipApplication(
   application: ScholarshipApplication
@@ -33,22 +33,28 @@ export async function addScholarshipApplication(
     if (!clientEmail) missingVars.push("GOOGLE_CLIENT_EMAIL");
     if (!privateKeyRaw) missingVars.push("GOOGLE_PRIVATE_KEY");
     if (!spreadsheetId) missingVars.push("GOOGLE_SHEET_ID");
-    throw new Error(
-      `Google Sheets configuration error: Missing required environment variable(s) in .env.local: ${missingVars.join(", ")}.`
-    );
+    const errorMsg = `Google Sheets API Configuration Error: Missing required environment variable(s): ${missingVars.join(
+      ", "
+    )}. Please configure these environment variables in your production deployment platform (e.g. Vercel / Netlify Settings).`;
+    console.error("[Google Sheets API Error]", errorMsg);
+    throw new Error(errorMsg);
   }
 
-  // Handle escaped newline characters and carriage returns in private key string
-  let privateKey = privateKeyRaw.replace(/\\n/g, "\n").replace(/\r/g, "");
-  if (privateKey.includes("0xcv8dkdk")) {
-    privateKey = privateKey.replace("0xcv8dkdk", "0xcv8dk");
+  // Handle escaped newline characters, quotes, and carriage returns in private key string
+  let privateKey = privateKeyRaw.trim();
+  if (
+    (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
+    (privateKey.startsWith("'") && privateKey.endsWith("'"))
+  ) {
+    privateKey = privateKey.slice(1, -1);
   }
+  privateKey = privateKey.replace(/\\n/g, "\n").replace(/\r/g, "").trim();
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
-      client_email: clientEmail,
+      client_email: clientEmail.trim(),
       private_key: privateKey,
-      project_id: projectId,
+      ...(projectId ? { project_id: projectId.trim() } : {}),
     },
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
@@ -71,12 +77,29 @@ export async function addScholarshipApplication(
     application.submittedAt,
   ];
 
-  await sheets.spreadsheets.values.append({
-    spreadsheetId,
-    range: "Applications!A:M",
-    valueInputOption: "USER_ENTERED",
-    requestBody: {
-      values: [rowValues],
-    },
-  });
+  try {
+    // Primary attempt: Try appending to "Applications!A:M" tab
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: spreadsheetId.trim(),
+      range: "Applications!A:M",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [rowValues],
+      },
+    });
+  } catch (rangeError: any) {
+    // Fallback: If "Applications" sheet tab does not exist (e.g. 400 range error), append to default first sheet
+    console.warn(
+      "[Google Sheets API Warning] Could not append to 'Applications!A:M' range, attempting default range 'A:M':",
+      rangeError?.message || rangeError
+    );
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: spreadsheetId.trim(),
+      range: "A:M",
+      valueInputOption: "USER_ENTERED",
+      requestBody: {
+        values: [rowValues],
+      },
+    });
+  }
 }
