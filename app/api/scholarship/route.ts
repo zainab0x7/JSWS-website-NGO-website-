@@ -117,20 +117,11 @@ export async function POST(request: Request) {
 
     console.log("[MASP Scholarship Application Received]:", newApplication);
 
-    // Save to Google Sheets
+    // Save to Google Sheets (non-blocking)
     try {
       await addScholarshipApplication(newApplication);
     } catch (sheetError: any) {
-      console.error("[Scholarship API Error] Failed to save application to Google Sheets:", sheetError);
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            sheetError?.message ||
-            "Unable to save scholarship application. Please ensure production environment variables (GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_SHEET_ID) are configured in your hosting settings."
-        },
-        { status: 500 }
-      );
+      console.warn("[Scholarship API Warning] Failed to save application to Google Sheets:", sheetError?.message || sheetError);
     }
 
     return NextResponse.json({

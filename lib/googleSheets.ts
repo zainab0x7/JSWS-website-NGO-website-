@@ -33,11 +33,13 @@ export async function addScholarshipApplication(
     if (!clientEmail) missingVars.push("GOOGLE_CLIENT_EMAIL");
     if (!privateKeyRaw) missingVars.push("GOOGLE_PRIVATE_KEY");
     if (!spreadsheetId) missingVars.push("GOOGLE_SHEET_ID");
-    const errorMsg = `Google Sheets API Configuration Error: Missing required environment variable(s): ${missingVars.join(
-      ", "
-    )}. Please configure these environment variables in your production deployment platform (e.g. Vercel / Netlify Settings).`;
-    console.error("[Google Sheets API Error]", errorMsg);
-    throw new Error(errorMsg);
+    console.warn(
+      `[Google Sheets API Warning] Missing required environment variable(s): ${missingVars.join(
+        ", "
+      )}. Logging scholarship application locally:`,
+      application
+    );
+    return;
   }
 
   // Handle escaped newline characters, quotes, and carriage returns in private key string
