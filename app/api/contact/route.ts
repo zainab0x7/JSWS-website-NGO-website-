@@ -1,4 +1,4 @@
-import { NextResponse } from "next";
+import { NextResponse } from "next/server";
 import { addContactSubmission } from "@/lib/googleSheets";
 
 export async function POST(request: Request) {
