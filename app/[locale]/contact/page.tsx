@@ -51,13 +51,7 @@ export default function ContactPage() {
       return;
     }
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT;
-
-    if (!endpoint || endpoint.trim() === "") {
-      setStatus("error");
-      setErrorMessage("Formspree endpoint is not configured. Please set NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT in environment variables.");
-      return;
-    }
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_CONTACT_ENDPOINT || "/api/contact";
 
     setStatus("loading");
 

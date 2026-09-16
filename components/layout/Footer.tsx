@@ -106,6 +106,7 @@ export function Footer() {
                 { href: "/doctors", label: t('links.doctors') },
                 { href: "/laboratory", label: t('links.laboratory') },
                 { href: "/volunteer", label: t('links.volunteer') },
+                { href: "/careers", label: t('links.careers') },
                 { href: "/registration", label: t('links.registration') },
               ].map((link, idx) => (
                 <li key={idx}>

@@ -72,6 +72,7 @@ export function Navbar() {
 
     { href: "/registration", label: t('registration') },
     { href: "/gallery", label: t('gallery') },
+    { href: "/careers", label: t('careers') },
     { href: "/contact", label: t('contact') },
   ];
 

@@ -51,13 +51,7 @@ export default function VolunteerPage() {
       return;
     }
 
-    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_VOLUNTEER_ENDPOINT;
-
-    if (!endpoint || endpoint.trim() === "") {
-      setStatus("error");
-      setErrorMessage("Formspree endpoint is not configured. Please set NEXT_PUBLIC_FORMSPREE_VOLUNTEER_ENDPOINT in environment variables.");
-      return;
-    }
+    const endpoint = process.env.NEXT_PUBLIC_FORMSPREE_VOLUNTEER_ENDPOINT || "/api/volunteer";
 
     setStatus("loading");
 

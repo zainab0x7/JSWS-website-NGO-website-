@@ -103,3 +103,72 @@ export async function addScholarshipApplication(
     });
   }
 }
+
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject?: string;
+  message: string;
+  submittedAt: string;
+}
+
+export async function addContactSubmission(
+  submission: ContactSubmission
+): Promise<void> {
+  const clientEmail = process.env.GOOGLE_CLIENT_EMAIL;
+  const privateKeyRaw = process.env.GOOGLE_PRIVATE_KEY;
+  const spreadsheetId = process.env.GOOGLE_SHEET_ID;
+
+  if (!clientEmail || !privateKeyRaw || !spreadsheetId) {
+    console.log("[JSWS Contact Submission Received]:", submission);
+    return;
+  }
+
+  let privateKey = privateKeyRaw.trim();
+  if (
+    (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
+    (privateKey.startsWith("'") && privateKey.endsWith("'"))
+  ) {
+    privateKey = privateKey.slice(1, -1);
+  }
+  privateKey = privateKey.replace(/\\n/g, "\n").replace(/\r/g, "").trim();
+
+  const auth = new google.auth.GoogleAuth({
+    credentials: {
+      client_email: clientEmail.trim(),
+      private_key: privateKey,
+    },
+    scopes: ["https://www.googleapis.com/auth/spreadsheets"],
+  });
+
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const rowValues = [
+    submission.id,
+    submission.name,
+    submission.email,
+    submission.phone,
+    submission.subject || "",
+    submission.message,
+    submission.submittedAt,
+  ];
+
+  try {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: spreadsheetId.trim(),
+      range: "Contacts!A:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: { values: [rowValues] },
+    });
+  } catch {
+    await sheets.spreadsheets.values.append({
+      spreadsheetId: spreadsheetId.trim(),
+      range: "A:G",
+      valueInputOption: "USER_ENTERED",
+      requestBody: { values: [rowValues] },
+    });
+  }
+}
+

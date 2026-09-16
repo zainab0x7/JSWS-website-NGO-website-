@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { addScholarshipApplication, ScholarshipApplication } from "@/lib/googleSheets";
 
 // Helper function to validate Pakistani phone number format
-export function isValidPakistaniPhone(phone: string): boolean {
+function isValidPakistaniPhone(phone: string): boolean {
   if (!phone) return false;
   // Remove spaces, hyphens, and parentheses
   const cleaned = phone.replace(/[\s\-()]/g, "");
