@@ -28,22 +28,19 @@ export async function addScholarshipApplication(
   const privateKeyRaw = process.env.GOOGLE_PRIVATE_KEY;
   const spreadsheetId = process.env.GOOGLE_SHEET_ID;
 
-  if (!clientEmail || !privateKeyRaw || !spreadsheetId) {
-    const missingVars: string[] = [];
-    if (!clientEmail) missingVars.push("GOOGLE_CLIENT_EMAIL");
-    if (!privateKeyRaw) missingVars.push("GOOGLE_PRIVATE_KEY");
-    if (!spreadsheetId) missingVars.push("GOOGLE_SHEET_ID");
-    console.warn(
-      `[Google Sheets API Warning] Missing required environment variable(s): ${missingVars.join(
-        ", "
-      )}. Logging scholarship application locally:`,
-      application
-    );
-    return;
+  const missingVars: string[] = [];
+  if (!clientEmail) missingVars.push("GOOGLE_CLIENT_EMAIL");
+  if (!privateKeyRaw) missingVars.push("GOOGLE_PRIVATE_KEY");
+  if (!spreadsheetId) missingVars.push("GOOGLE_SHEET_ID");
+
+  if (missingVars.length > 0) {
+    const errorMsg = `[Google Sheets API Error] Missing required environment variable(s): ${missingVars.join(", ")}`;
+    console.error(errorMsg);
+    throw new Error(errorMsg);
   }
 
   // Handle escaped newline characters, quotes, and carriage returns in private key string
-  let privateKey = privateKeyRaw.trim();
+  let privateKey = privateKeyRaw!.trim();
   if (
     (privateKey.startsWith('"') && privateKey.endsWith('"')) ||
     (privateKey.startsWith("'") && privateKey.endsWith("'"))
@@ -54,7 +51,7 @@ export async function addScholarshipApplication(
 
   const auth = new google.auth.GoogleAuth({
     credentials: {
-      client_email: clientEmail.trim(),
+      client_email: clientEmail!.trim(),
       private_key: privateKey,
       ...(projectId ? { project_id: projectId.trim() } : {}),
     },
@@ -82,27 +79,33 @@ export async function addScholarshipApplication(
   try {
     // Primary attempt: Try appending to "Applications!A:M" tab
     await sheets.spreadsheets.values.append({
-      spreadsheetId: spreadsheetId.trim(),
+      spreadsheetId: spreadsheetId!.trim(),
       range: "Applications!A:M",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [rowValues],
       },
     });
+    console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to Applications!A:M`);
   } catch (rangeError: any) {
-    // Fallback: If "Applications" sheet tab does not exist (e.g. 400 range error), append to default first sheet
     console.warn(
-      "[Google Sheets API Warning] Could not append to 'Applications!A:M' range, attempting default range 'A:M':",
+      "[Google Sheets API Warning] Could not append to 'Applications!A:M' range, trying fallback range 'A:M':",
       rangeError?.message || rangeError
     );
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: spreadsheetId.trim(),
-      range: "A:M",
-      valueInputOption: "USER_ENTERED",
-      requestBody: {
-        values: [rowValues],
-      },
-    });
+    try {
+      await sheets.spreadsheets.values.append({
+        spreadsheetId: spreadsheetId!.trim(),
+        range: "A:M",
+        valueInputOption: "USER_ENTERED",
+        requestBody: {
+          values: [rowValues],
+        },
+      });
+      console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to fallback range A:M`);
+    } catch (fallbackErr: any) {
+      console.error("[Google Sheets API Error] Append failed:", fallbackErr?.message || fallbackErr);
+      throw fallbackErr;
+    }
   }
 }
 

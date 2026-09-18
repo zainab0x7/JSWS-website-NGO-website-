@@ -115,14 +115,10 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString()
     };
 
-    console.log("[MASP Scholarship Application Received]:", newApplication);
+    console.log("[MASP Scholarship Application Received]:", newApplication.id, newApplication.fullName);
 
-    // Save to Google Sheets (non-blocking)
-    try {
-      await addScholarshipApplication(newApplication);
-    } catch (sheetError: any) {
-      console.warn("[Scholarship API Warning] Failed to save application to Google Sheets:", sheetError?.message || sheetError);
-    }
+    // Save to Google Sheets (blocking - must succeed before returning 200)
+    await addScholarshipApplication(newApplication);
 
     return NextResponse.json({
       success: true,
@@ -130,7 +126,7 @@ export async function POST(request: Request) {
       applicationId: newApplication.id
     });
   } catch (error: any) {
-    console.error("[Scholarship API Internal Error]:", error);
+    console.error("[Scholarship API Error]:", error?.message || error);
     return NextResponse.json(
       {
         success: false,
