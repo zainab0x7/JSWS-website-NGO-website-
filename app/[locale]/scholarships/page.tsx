@@ -36,6 +36,8 @@ export default function ScholarshipsPage() {
   const [formData, setFormData] = useState({
     fullName: "",
     fatherName: "",
+    cnic: "",
+    guardianCnic: "",
     age: "",
     gender: "",
     studentNumber: "",
@@ -61,6 +63,19 @@ export default function ScholarshipsPage() {
     { title: "Commitment to Community", desc: "Dedication to completing education and helping society." },
   ];
 
+  const formatCNIC = (val: string) => {
+    const digitsOnly = val.replace(/\D/g, "").slice(0, 13);
+    if (digitsOnly.length <= 5) return digitsOnly;
+    if (digitsOnly.length <= 12) return `${digitsOnly.slice(0, 5)}-${digitsOnly.slice(5)}`;
+    return `${digitsOnly.slice(0, 5)}-${digitsOnly.slice(5, 12)}-${digitsOnly.slice(12)}`;
+  };
+
+  const validatePakCnic = (cnic: string) => {
+    if (!cnic) return false;
+    const cleaned = cnic.replace(/\D/g, "");
+    return cleaned.length === 13;
+  };
+
   const validatePakPhone = (phone: string) => {
     if (!phone) return false;
     const cleaned = phone.replace(/[\s\-()]/g, "");
@@ -71,7 +86,11 @@ export default function ScholarshipsPage() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    let finalValue = value;
+    if (name === "cnic" || name === "guardianCnic") {
+      finalValue = formatCNIC(value);
+    }
+    setFormData((prev) => ({ ...prev, [name]: finalValue }));
     if (errors[name]) {
       setErrors((prev) => {
         const updated = { ...prev };
@@ -89,6 +108,12 @@ export default function ScholarshipsPage() {
     }
     if (!formData.fatherName.trim()) {
       newErrors.fatherName = "Guardian / Father Name is required.";
+    }
+    if (!formData.cnic.trim() || !validatePakCnic(formData.cnic)) {
+      newErrors.cnic = "Valid 13-digit Student CNIC or B-Form is required (e.g. 35202-1234567-1).";
+    }
+    if (!formData.guardianCnic.trim() || !validatePakCnic(formData.guardianCnic)) {
+      newErrors.guardianCnic = "Valid 13-digit Parent / Guardian CNIC is required (e.g. 35202-1234567-1).";
     }
     const numAge = Number(formData.age);
     if (!formData.age || isNaN(numAge) || numAge <= 0 || numAge > 120) {
@@ -171,6 +196,8 @@ export default function ScholarshipsPage() {
     const text = `New MASP Scholarship Application Received
 Student Name: ${data.fullName}
 Father/Guardian Name: ${data.fatherName}
+Student CNIC/B-Form: ${data.cnic}
+Parent/Guardian CNIC: ${data.guardianCnic}
 Student Number: ${data.studentNumber}
 Phone: ${data.phone}
 Guardian Contact: ${data.guardianPhone}
@@ -334,6 +361,8 @@ Please review the application in the MASP Scholarship Google Sheet.`;
                       setFormData({
                         fullName: "",
                         fatherName: "",
+                        cnic: "",
+                        guardianCnic: "",
                         age: "",
                         gender: "",
                         studentNumber: "",
@@ -396,6 +425,44 @@ Please review the application in the MASP Scholarship Google Sheet.`;
                       placeholder="Father or Guardian Name"
                     />
                     {errors.fatherName && <p className="text-xs text-red-500 font-medium">{errors.fatherName}</p>}
+                  </div>
+                </div>
+
+                {/* Student & Guardian CNIC / B-Form */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700">
+                      Student CNIC or B-Form No. <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="cnic"
+                      value={formData.cnic}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      maxLength={15}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.cnic ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 text-gray-900`}
+                      placeholder="35202-1234567-1"
+                    />
+                    {errors.cnic && <p className="text-xs text-red-500 font-medium">{errors.cnic}</p>}
+                  </div>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-bold text-gray-700">
+                      Parent / Guardian CNIC No. <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      required
+                      type="text"
+                      name="guardianCnic"
+                      value={formData.guardianCnic}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      maxLength={15}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.guardianCnic ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 text-gray-900`}
+                      placeholder="35202-1234567-1"
+                    />
+                    {errors.guardianCnic && <p className="text-xs text-red-500 font-medium">{errors.guardianCnic}</p>}
                   </div>
                 </div>
 
