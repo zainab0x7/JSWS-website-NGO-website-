@@ -11,12 +11,22 @@ function isValidPakistaniPhone(phone: string): boolean {
   return pakPhoneRegex.test(cleaned);
 }
 
+// Helper function to validate Pakistani CNIC / B-Form format (13 digits)
+function isValidPakCnic(cnic: string): boolean {
+  if (!cnic || typeof cnic !== "string") return false;
+  const cleaned = cnic.replace(/\D/g, "");
+  return cleaned.length === 13;
+}
+
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const {
       fullName,
       fatherName,
+      studentCnic: rawStudentCnic,
+      cnic: rawCnic,
+      guardianCnic: rawGuardianCnic,
       age,
       gender,
       studentNumber,
@@ -27,6 +37,9 @@ export async function POST(request: Request) {
       institutionName,
       financialNeed
     } = body;
+
+    const studentCnic = typeof rawStudentCnic === "string" ? rawStudentCnic.trim() : (typeof rawCnic === "string" ? rawCnic.trim() : "");
+    const guardianCnic = typeof rawGuardianCnic === "string" ? rawGuardianCnic.trim() : "";
 
     const errors: Record<string, string> = {};
 
@@ -40,48 +53,58 @@ export async function POST(request: Request) {
       errors.fatherName = "Guardian / Father Name is required.";
     }
 
-    // 3. Age validation
+    // 3. Student CNIC or B-Form No. validation
+    if (!studentCnic || !isValidPakCnic(studentCnic)) {
+      errors.studentCnic = "Valid 13-digit Student CNIC or B-Form No. is required (e.g. 35202-1234567-1).";
+    }
+
+    // 4. Parent / Guardian CNIC No. validation
+    if (!guardianCnic || !isValidPakCnic(guardianCnic)) {
+      errors.guardianCnic = "Valid 13-digit Parent / Guardian CNIC No. is required (e.g. 35202-1234567-1).";
+    }
+
+    // 5. Age validation
     const numAge = Number(age);
     if (age === undefined || age === null || age === "" || isNaN(numAge) || numAge <= 0 || numAge > 120) {
       errors.age = "Please enter a valid age (1-120).";
     }
 
-    // 4. Gender validation
+    // 6. Gender validation
     if (!gender || (gender !== "Male" && gender !== "Female" && gender !== "Other")) {
       errors.gender = "Please select a valid gender.";
     }
 
-    // 5. Student Number validation
+    // 7. Student Number validation
     if (!studentNumber || typeof studentNumber !== "string" || !studentNumber.trim()) {
       errors.studentNumber = "Student / Registration Number is required.";
     }
 
-    // 6. Phone Number (WhatsApp) validation
+    // 8. Phone Number (WhatsApp) validation
     if (!phone || typeof phone !== "string" || !isValidPakistaniPhone(phone)) {
       errors.phone = "Please enter a valid Pakistani phone number (e.g. 03001234567 or +923001234567).";
     }
 
-    // 7. Student Guardian Contact Number validation
+    // 9. Student Guardian Contact Number validation
     if (!guardianPhone || typeof guardianPhone !== "string" || !isValidPakistaniPhone(guardianPhone)) {
       errors.guardianPhone = "Please enter a valid Pakistani phone number for guardian (e.g. 03001234567 or +923001234567).";
     }
 
-    // 8. Address validation
+    // 10. Address validation
     if (!address || typeof address !== "string" || !address.trim()) {
       errors.address = "Complete residential address is required.";
     }
 
-    // 9. Educational Level validation
+    // 11. Educational Level validation
     if (!educationLevel || typeof educationLevel !== "string" || !educationLevel.trim()) {
       errors.educationLevel = "Educational Level is required.";
     }
 
-    // 10. Institution Name validation
+    // 12. Institution Name validation
     if (!institutionName || typeof institutionName !== "string" || !institutionName.trim()) {
       errors.institutionName = "School / College / University Name is required.";
     }
 
-    // 11. Financial Need validation
+    // 13. Financial Need validation
     if (!financialNeed || typeof financialNeed !== "string" || !financialNeed.trim()) {
       errors.financialNeed = "Brief explanation of financial need is required.";
     }
@@ -103,6 +126,8 @@ export async function POST(request: Request) {
       id: applicationId,
       fullName: fullName.trim(),
       fatherName: fatherName.trim(),
+      studentCnic,
+      guardianCnic,
       age: numAge,
       gender,
       studentNumber: studentNumber.trim(),

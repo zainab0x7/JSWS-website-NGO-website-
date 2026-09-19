@@ -36,7 +36,7 @@ export default function ScholarshipsPage() {
   const [formData, setFormData] = useState({
     fullName: "",
     fatherName: "",
-    cnic: "",
+    studentCnic: "",
     guardianCnic: "",
     age: "",
     gender: "",
@@ -87,7 +87,7 @@ export default function ScholarshipsPage() {
   ) => {
     const { name, value } = e.target;
     let finalValue = value;
-    if (name === "cnic" || name === "guardianCnic") {
+    if (name === "studentCnic" || name === "cnic" || name === "guardianCnic") {
       finalValue = formatCNIC(value);
     }
     setFormData((prev) => ({ ...prev, [name]: finalValue }));
@@ -95,6 +95,8 @@ export default function ScholarshipsPage() {
       setErrors((prev) => {
         const updated = { ...prev };
         delete updated[name];
+        if (name === "studentCnic") delete updated.cnic;
+        if (name === "cnic") delete updated.studentCnic;
         return updated;
       });
     }
@@ -109,8 +111,9 @@ export default function ScholarshipsPage() {
     if (!formData.fatherName.trim()) {
       newErrors.fatherName = "Guardian / Father Name is required.";
     }
-    if (!formData.cnic.trim() || !validatePakCnic(formData.cnic)) {
-      newErrors.cnic = "Valid 13-digit Student CNIC or B-Form is required (e.g. 35202-1234567-1).";
+    const studentCnicVal = formData.studentCnic || (formData as any).cnic || "";
+    if (!studentCnicVal.trim() || !validatePakCnic(studentCnicVal)) {
+      newErrors.studentCnic = "Valid 13-digit Student CNIC or B-Form is required (e.g. 35202-1234567-1).";
     }
     if (!formData.guardianCnic.trim() || !validatePakCnic(formData.guardianCnic)) {
       newErrors.guardianCnic = "Valid 13-digit Parent / Guardian CNIC is required (e.g. 35202-1234567-1).";
@@ -158,11 +161,13 @@ export default function ScholarshipsPage() {
 
     setIsSubmitting(true);
     try {
+      const studentCnicVal = formData.studentCnic || (formData as any).cnic || "";
       const res = await fetch("/api/scholarship", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...formData,
+          studentCnic: studentCnicVal,
           age: Number(formData.age)
         })
       });
@@ -192,11 +197,12 @@ export default function ScholarshipsPage() {
     const cleanNumber = rawNumber.replace(/\D/g, "");
     
     const data = lastSubmittedData || formData;
+    const studentCnicVal = data.studentCnic || (data as any).cnic || "";
 
     const text = `New MASP Scholarship Application Received
 Student Name: ${data.fullName}
 Father/Guardian Name: ${data.fatherName}
-Student CNIC/B-Form: ${data.cnic}
+Student CNIC/B-Form: ${studentCnicVal}
 Parent/Guardian CNIC: ${data.guardianCnic}
 Student Number: ${data.studentNumber}
 Phone: ${data.phone}
@@ -361,7 +367,7 @@ Please review the application in the MASP Scholarship Google Sheet.`;
                       setFormData({
                         fullName: "",
                         fatherName: "",
-                        cnic: "",
+                        studentCnic: "",
                         guardianCnic: "",
                         age: "",
                         gender: "",
@@ -437,15 +443,15 @@ Please review the application in the MASP Scholarship Google Sheet.`;
                     <input
                       required
                       type="text"
-                      name="cnic"
-                      value={formData.cnic}
+                      name="studentCnic"
+                      value={formData.studentCnic}
                       onChange={handleChange}
                       disabled={isSubmitting}
                       maxLength={15}
-                      className={`w-full px-4 py-3 rounded-xl border ${errors.cnic ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 text-gray-900`}
+                      className={`w-full px-4 py-3 rounded-xl border ${errors.studentCnic || errors.cnic ? 'border-red-500 bg-red-50/20' : 'border-gray-200 bg-gray-50'} text-sm focus:outline-none focus:ring-2 focus:ring-sky-600 text-gray-900`}
                       placeholder="35202-1234567-1"
                     />
-                    {errors.cnic && <p className="text-xs text-red-500 font-medium">{errors.cnic}</p>}
+                    {(errors.studentCnic || errors.cnic) && <p className="text-xs text-red-500 font-medium">{errors.studentCnic || errors.cnic}</p>}
                   </div>
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold text-gray-700">

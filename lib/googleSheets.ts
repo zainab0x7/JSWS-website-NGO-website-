@@ -4,6 +4,8 @@ export interface ScholarshipApplication {
   id: string;
   fullName: string;
   fatherName: string;
+  studentCnic: string;
+  guardianCnic: string;
   age: number;
   gender: string;
   studentNumber: string;
@@ -64,6 +66,8 @@ export async function addScholarshipApplication(
     application.id,
     application.fullName,
     application.fatherName,
+    application.studentCnic,
+    application.guardianCnic,
     application.age,
     application.gender,
     application.studentNumber,
@@ -77,31 +81,31 @@ export async function addScholarshipApplication(
   ];
 
   try {
-    // Primary attempt: Try appending to "Applications!A:M" tab
+    // Primary attempt: Try appending to "Applications!A:O" tab
     await sheets.spreadsheets.values.append({
       spreadsheetId: spreadsheetId!.trim(),
-      range: "Applications!A:M",
+      range: "Applications!A:O",
       valueInputOption: "USER_ENTERED",
       requestBody: {
         values: [rowValues],
       },
     });
-    console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to Applications!A:M`);
+    console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to Applications!A:O`);
   } catch (rangeError: any) {
     console.warn(
-      "[Google Sheets API Warning] Could not append to 'Applications!A:M' range, trying fallback range 'A:M':",
+      "[Google Sheets API Warning] Could not append to 'Applications!A:O' range, trying fallback range 'A:O':",
       rangeError?.message || rangeError
     );
     try {
       await sheets.spreadsheets.values.append({
         spreadsheetId: spreadsheetId!.trim(),
-        range: "A:M",
+        range: "A:O",
         valueInputOption: "USER_ENTERED",
         requestBody: {
           values: [rowValues],
         },
       });
-      console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to fallback range A:M`);
+      console.log(`[Google Sheets API Success] Appended scholarship application ${application.id} to fallback range A:O`);
     } catch (fallbackErr: any) {
       console.error("[Google Sheets API Error] Append failed:", fallbackErr?.message || fallbackErr);
       throw fallbackErr;
